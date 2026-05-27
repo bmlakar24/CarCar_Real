@@ -7,7 +7,8 @@ namespace CarCar
     {
         string username_admin= "admin";
         string password_admin = "admin";
-       
+        string username_zap = "zaposlenik";
+        string password_zap = "zaposlenik";
 
         public FrmLogin()
         {
@@ -35,6 +36,13 @@ namespace CarCar
                     FrmAdmin frmAdmin = new FrmAdmin();
                     Hide();
                     frmAdmin.ShowDialog();
+                    Close();
+                }
+                else if (txtUsername.Text == username_zap && txtPassword.Text == password_zap)
+                {
+                    FrmZaposlenik frmZaposlenik = new FrmZaposlenik();
+                    Hide();
+                    frmZaposlenik.ShowDialog();
                     Close();
                 }
                 else
