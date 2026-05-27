@@ -16,5 +16,18 @@ namespace CarCar
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FrmLogin frmLogin = new FrmLogin();
+            Hide();
+            frmLogin.ShowDialog();
+            Close();
+        }
+
+        private void FrmAdmin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
