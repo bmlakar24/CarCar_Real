@@ -91,7 +91,6 @@
             this.lblServisi.Size = new System.Drawing.Size(48, 16);
             this.lblServisi.TabIndex = 6;
             this.lblServisi.Text = "Servisi";
-            this.lblServisi.Click += new System.EventHandler(this.label4_Click);
             // 
             // lblIzvještaj
             // 

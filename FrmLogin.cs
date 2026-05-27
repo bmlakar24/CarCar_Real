@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using DBLayer;
 
 namespace CarCar
 {
@@ -16,7 +17,7 @@ namespace CarCar
         }
         private void FrmLogin_Load(object sender, EventArgs e)
         {
-           
+            DB.SetConfiguration("PI2526_bmlakar24_DB", "PI2526_bmlakar24", "|7Qpe;.NZ!}Fj[sj");
         }
 
         private void btnLogin_Click_1(object sender, EventArgs e)
