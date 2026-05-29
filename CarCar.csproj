@@ -68,6 +68,7 @@
     <Compile Include="FrmZaposlenik.Designer.cs">
       <DependentUpon>FrmZaposlenik.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Zaposlenik.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmAdmin.resx">
@@ -100,6 +101,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\DBLayer.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
