@@ -68,6 +68,7 @@
     <Compile Include="FrmZaposlenik.Designer.cs">
       <DependentUpon>FrmZaposlenik.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Klijent.cs" />
     <Compile Include="Models\Termin.cs" />
     <Compile Include="Models\Vozilo.cs" />
     <Compile Include="Models\Zaposlenik.cs" />
