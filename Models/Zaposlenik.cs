@@ -12,6 +12,8 @@ namespace CarCar.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public string Uloga { get; set; }
+
         public override string ToString()
         {
             return FirstName + " " + LastName;
