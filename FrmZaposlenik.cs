@@ -59,6 +59,33 @@ namespace CarCar
                 dgvRezervacijeZap.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
         }
-       
+        private void lblServisi_Click(object sender, EventArgs e)
+        {
+            UcitajServise();
+        }
+        private void UcitajServise()
+        {
+            var servisi = ServisiRepository.GetServisi();
+            var zaPrikaz = servisi.Select(r => new
+            {
+                Id = r.Id,
+                VrijemeOd = r.VrijemeOd,
+                VrijemeDo = r.VrijemeDo,
+                Status = r.Status,
+                Vozilo = r.Vozilo != null ? r.Vozilo.Registracija : "-",
+                Zaposlenik = r.Zaposlenik != null ? r.Zaposlenik.Ime + " " + r.Zaposlenik.Prezime : "-",
+                OIBKlijenta = r.OIBKlijenta,
+                TrošakServisa = r.Vozilo.TrošakServisa,
+            }).ToList();
+            dgvRezervacijeZap.DataSource = zaPrikaz;
+            if (dgvRezervacijeZap.Columns.Count > 0)
+            {
+                dgvRezervacijeZap.Columns["VrijemeOd"].HeaderText = "Od";
+                dgvRezervacijeZap.Columns["VrijemeDo"].HeaderText = "Do";
+                dgvRezervacijeZap.Columns["OIBKlijenta"].HeaderText = "OIB Klijenta";
+                dgvRezervacijeZap.Columns["TrošakServisa"].HeaderText = "Trošak Servisa";
+                dgvRezervacijeZap.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+        }
     }
 }
