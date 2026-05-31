@@ -77,9 +77,12 @@
     <Compile Include="Models\Zaposlenik.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\KlijentRepository.cs" />
     <Compile Include="Repositories\RezervacijaRepository.cs" />
     <Compile Include="Repositories\ServisiRepository.cs" />
     <Compile Include="Repositories\TerminRepository.cs" />
+    <Compile Include="Repositories\VoziloRepository.cs" />
+    <Compile Include="Repositories\ZaposlenikRepository.cs" />
     <EmbeddedResource Include="FrmAdmin.resx">
       <DependentUpon>FrmAdmin.cs</DependentUpon>
     </EmbeddedResource>
