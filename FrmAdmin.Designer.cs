@@ -84,6 +84,7 @@
             this.lblRezervacije.Size = new System.Drawing.Size(79, 16);
             this.lblRezervacije.TabIndex = 5;
             this.lblRezervacije.Text = "Rezervacije";
+            this.lblRezervacije.Click += new System.EventHandler(this.lblRezervacije_Click);
             // 
             // lblServisi
             // 
@@ -93,6 +94,7 @@
             this.lblServisi.Size = new System.Drawing.Size(48, 16);
             this.lblServisi.TabIndex = 6;
             this.lblServisi.Text = "Servisi";
+            this.lblServisi.Click += new System.EventHandler(this.lblServisi_Click);
             // 
             // lblIzvještaj
             // 
@@ -135,6 +137,7 @@
             this.Name = "FrmAdmin";
             this.Text = "FrmAdmin";
             this.Load += new System.EventHandler(this.FrmAdmin_Load);
+            this.Click += new System.EventHandler(this.lblServisi_Click);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRezervacije)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

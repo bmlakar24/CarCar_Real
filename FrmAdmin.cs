@@ -36,7 +36,7 @@ namespace CarCar
 
             var zaPrikaz = rezervacije.Select(r => new
             {
-                Id = r.Id, 
+                Id = r.Id,
                 VrijemeOd = r.VrijemeOd,
                 VrijemeDo = r.VrijemeDo,
                 Status = r.Status,
@@ -58,6 +58,40 @@ namespace CarCar
 
                 dgvRezervacije.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
+        }
+
+        private void lblServisi_Click(object sender, EventArgs e)
+        {
+            UcitajServise();
+        }
+        private void UcitajServise()
+        {
+            var servisi = ServisiRepository.GetServisi();
+            var zaPrikaz = servisi.Select(r => new
+            {
+                Id = r.Id,
+                VrijemeOd = r.VrijemeOd,
+                VrijemeDo = r.VrijemeDo,
+                Status = r.Status,
+                Vozilo = r.Vozilo != null ? r.Vozilo.Registracija : "-",
+                Zaposlenik = r.Zaposlenik != null ? r.Zaposlenik.Ime + " " + r.Zaposlenik.Prezime : "-",
+                OIBKlijenta = r.OIBKlijenta,
+                TrošakServisa= r.Vozilo.TrošakServisa,
+            }).ToList();
+            dgvRezervacije.DataSource = zaPrikaz;
+            if (dgvRezervacije.Columns.Count > 0)
+            {
+                dgvRezervacije.Columns["VrijemeOd"].HeaderText = "Od";
+                dgvRezervacije.Columns["VrijemeDo"].HeaderText = "Do";
+                dgvRezervacije.Columns["OIBKlijenta"].HeaderText = "OIB Klijenta";
+                dgvRezervacije.Columns["TrošakServisa"].HeaderText = "Trošak Servisa";
+                dgvRezervacije.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+        }
+
+        private void lblRezervacije_Click(object sender, EventArgs e)
+        {
+            UcitajRezervacije();
         }
     }
 }

@@ -17,7 +17,8 @@ namespace CarCar.Models
         public decimal CijenaDan {  get; set; }
 
         public decimal CijenaSat {  get; set; }
-
+        
+        public decimal TrošakServisa { get; set; }
 
         public List<Termin> Termini { get; set; } = new List<Termin>();
     }

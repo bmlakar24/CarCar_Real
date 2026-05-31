@@ -28,9 +28,9 @@ namespace CarCar
 
         private void FrmZaposlenik_Load(object sender, EventArgs e)
         {
-            UcitajRezervacijeZaposlenik();
+            UcitajRezervacije();
         }
-        private void UcitajRezervacijeZaposlenik()
+        private void UcitajRezervacije()
         {
             var rezervacije = RezervacijaRepository.GetRezervacije();
 
@@ -59,5 +59,6 @@ namespace CarCar
                 dgvRezervacijeZap.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
         }
+       
     }
 }

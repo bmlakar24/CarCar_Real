@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblIzvještaj = new System.Windows.Forms.Label();
             this.lblServisi = new System.Windows.Forms.Label();
             this.lblRezervacije = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,16 +37,6 @@
             this.dgvRezervacijeZap = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRezervacijeZap)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblIzvještaj
-            // 
-            this.lblIzvještaj.AutoSize = true;
-            this.lblIzvještaj.Location = new System.Drawing.Point(479, 32);
-            this.lblIzvještaj.MaximumSize = new System.Drawing.Size(100, 100);
-            this.lblIzvještaj.Name = "lblIzvještaj";
-            this.lblIzvještaj.Size = new System.Drawing.Size(55, 16);
-            this.lblIzvještaj.TabIndex = 14;
-            this.lblIzvještaj.Text = "Izvještaj";
             // 
             // lblServisi
             // 
@@ -66,6 +55,7 @@
             this.lblRezervacije.Size = new System.Drawing.Size(79, 16);
             this.lblRezervacije.TabIndex = 12;
             this.lblRezervacije.Text = "Rezervacije";
+            
             // 
             // label2
             // 
@@ -124,7 +114,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(968, 450);
             this.Controls.Add(this.dgvRezervacijeZap);
-            this.Controls.Add(this.lblIzvještaj);
             this.Controls.Add(this.lblServisi);
             this.Controls.Add(this.lblRezervacije);
             this.Controls.Add(this.label2);
@@ -141,8 +130,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblIzvještaj;
         private System.Windows.Forms.Label lblServisi;
         private System.Windows.Forms.Label lblRezervacije;
         private System.Windows.Forms.Label label2;
