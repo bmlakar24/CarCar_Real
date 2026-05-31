@@ -13,6 +13,7 @@ namespace CarCar
 {
     public partial class FrmZaposlenik : Form
     {
+        private string trenutniPrikaz = "Rezervacije";
         public FrmZaposlenik()
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace CarCar
 
         private void FrmZaposlenik_Load(object sender, EventArgs e)
         {
+            trenutniPrikaz = "Rezervacije";
             UcitajRezervacije();
         }
         private void UcitajRezervacije()
@@ -61,6 +63,7 @@ namespace CarCar
         }
         private void lblServisi_Click(object sender, EventArgs e)
         {
+            trenutniPrikaz= "Servisi";
             UcitajServise();
         }
         private void UcitajServise()
@@ -93,5 +96,38 @@ namespace CarCar
             UcitajRezervacije();
         }
 
+        private void btnObrisiZap_Click(object sender, EventArgs e)
+        {
+            if (dgvRezervacijeZap.SelectedRows.Count > 0)
+            {
+
+                int idZaBrisanje = Convert.ToInt32(dgvRezervacijeZap.SelectedRows[0].Cells["Id"].Value);
+
+                var rezultat = MessageBox.Show($"Jeste li sigurni da želite obrisati stavku ID: {idZaBrisanje}?",
+                                               "Potvrda", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (rezultat == DialogResult.Yes)
+                {
+
+                    TerminRepository.DeleteTermin(idZaBrisanje);
+
+
+                    if (trenutniPrikaz == "Servisi")
+                    {
+                        dgvRezervacijeZap.DataSource = ServisiRepository.GetServisi();
+                    }
+                    else if(trenutniPrikaz == "Rezervacije")
+                    {
+                        dgvRezervacijeZap.DataSource = RezervacijaRepository.GetRezervacije();
+                    }
+
+                    MessageBox.Show("Uspješno obrisano!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Molimo odaberite cijeli redak za brisanje.");
+            }
+        }
     }
 }
