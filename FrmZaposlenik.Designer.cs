@@ -28,12 +28,107 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.lblIzvještaj = new System.Windows.Forms.Label();
+            this.lblServisi = new System.Windows.Forms.Label();
+            this.lblRezervacije = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblKorisnikZap = new System.Windows.Forms.Label();
+            this.lblImeSustava = new System.Windows.Forms.Label();
+            this.btnOdjava = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // lblIzvještaj
+            // 
+            this.lblIzvještaj.AutoSize = true;
+            this.lblIzvještaj.Location = new System.Drawing.Point(479, 32);
+            this.lblIzvještaj.MaximumSize = new System.Drawing.Size(100, 100);
+            this.lblIzvještaj.Name = "lblIzvještaj";
+            this.lblIzvještaj.Size = new System.Drawing.Size(55, 16);
+            this.lblIzvještaj.TabIndex = 14;
+            this.lblIzvještaj.Text = "Izvještaj";
+            // 
+            // lblServisi
+            // 
+            this.lblServisi.AutoSize = true;
+            this.lblServisi.Location = new System.Drawing.Point(378, 32);
+            this.lblServisi.Name = "lblServisi";
+            this.lblServisi.Size = new System.Drawing.Size(48, 16);
+            this.lblServisi.TabIndex = 13;
+            this.lblServisi.Text = "Servisi";
+            // 
+            // lblRezervacije
+            // 
+            this.lblRezervacije.AutoSize = true;
+            this.lblRezervacije.Location = new System.Drawing.Point(233, 32);
+            this.lblRezervacije.Name = "lblRezervacije";
+            this.lblRezervacije.Size = new System.Drawing.Size(79, 16);
+            this.lblRezervacije.TabIndex = 12;
+            this.lblRezervacije.Text = "Rezervacije";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(115, 32);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 16);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Vozila";
+            // 
+            // lblKorisnikZap
+            // 
+            this.lblKorisnikZap.AutoSize = true;
+            this.lblKorisnikZap.Location = new System.Drawing.Point(794, 13);
+            this.lblKorisnikZap.Name = "lblKorisnikZap";
+            this.lblKorisnikZap.Size = new System.Drawing.Size(74, 16);
+            this.lblKorisnikZap.TabIndex = 10;
+            this.lblKorisnikZap.Text = "Zaposlenik";
+            // 
+            // lblImeSustava
+            // 
+            this.lblImeSustava.AutoSize = true;
+            this.lblImeSustava.Location = new System.Drawing.Point(5, 13);
+            this.lblImeSustava.Name = "lblImeSustava";
+            this.lblImeSustava.Size = new System.Drawing.Size(49, 16);
+            this.lblImeSustava.TabIndex = 9;
+            this.lblImeSustava.Text = "CarCar";
+            // 
+            // btnOdjava
+            // 
+            this.btnOdjava.Location = new System.Drawing.Point(874, 8);
+            this.btnOdjava.Name = "btnOdjava";
+            this.btnOdjava.Size = new System.Drawing.Size(89, 26);
+            this.btnOdjava.TabIndex = 8;
+            this.btnOdjava.Text = "Odjava";
+            this.btnOdjava.UseVisualStyleBackColor = true;
+            this.btnOdjava.Click += new System.EventHandler(this.btnOdjava_Click);
+            // 
+            // FrmZaposlenik
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(968, 450);
+            this.Controls.Add(this.lblIzvještaj);
+            this.Controls.Add(this.lblServisi);
+            this.Controls.Add(this.lblRezervacije);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblKorisnikZap);
+            this.Controls.Add(this.lblImeSustava);
+            this.Controls.Add(this.btnOdjava);
+            this.Name = "FrmZaposlenik";
             this.Text = "FrmZaposlenik";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label lblIzvještaj;
+        private System.Windows.Forms.Label lblServisi;
+        private System.Windows.Forms.Label lblRezervacije;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblKorisnikZap;
+        private System.Windows.Forms.Label lblImeSustava;
+        private System.Windows.Forms.Button btnOdjava;
     }
 }

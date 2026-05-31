@@ -17,11 +17,12 @@ namespace CarCar.Models
 
         public DateTime VrijemeDo {  get; set; }
 
-        public int VoziloID { get; set; }
+        public int IdVozila { get; set; }
 
         public Vozilo Vozilo { get; set; }
 
-        public int OIBKlijenta { get; set; }
+        public string OIBKlijenta => Klijent?.OIB;
+
         public Klijent Klijent { get; set; }
 
         public int ZaposlenikID { get; set; }
@@ -30,7 +31,7 @@ namespace CarCar.Models
         public decimal? CijenaNajma {
             get
             {
-                if(Tip!= "Rezervacija" || Vozilo == null)
+                if(Tip!= "Najam" || Vozilo == null)
                 {
                     return null;
                 }
@@ -39,7 +40,6 @@ namespace CarCar.Models
                     return null;
 
                 }
-                
                     TimeSpan trajanje = VrijemeDo - VrijemeOd;
                     int dani = trajanje.Days;
                     int sati = trajanje.Hours;

@@ -35,13 +35,13 @@
             this.lblRezervacije = new System.Windows.Forms.Label();
             this.lblServisi = new System.Windows.Forms.Label();
             this.lblIzvještaj = new System.Windows.Forms.Label();
-            this.dgvStudents = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
+            this.dgvRezervacije = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRezervacije)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOdjava
             // 
-            this.btnOdjava.Location = new System.Drawing.Point(496, 2);
+            this.btnOdjava.Location = new System.Drawing.Point(881, 7);
             this.btnOdjava.Name = "btnOdjava";
             this.btnOdjava.Size = new System.Drawing.Size(89, 26);
             this.btnOdjava.TabIndex = 0;
@@ -61,7 +61,7 @@
             // lblKorisnik
             // 
             this.lblKorisnik.AutoSize = true;
-            this.lblKorisnik.Location = new System.Drawing.Point(415, 7);
+            this.lblKorisnik.Location = new System.Drawing.Point(820, 9);
             this.lblKorisnik.Name = "lblKorisnik";
             this.lblKorisnik.Size = new System.Drawing.Size(45, 16);
             this.lblKorisnik.TabIndex = 2;
@@ -70,7 +70,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(79, 58);
+            this.label2.Location = new System.Drawing.Point(122, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 16);
             this.label2.TabIndex = 4;
@@ -79,7 +79,7 @@
             // lblRezervacije
             // 
             this.lblRezervacije.AutoSize = true;
-            this.lblRezervacije.Location = new System.Drawing.Point(192, 58);
+            this.lblRezervacije.Location = new System.Drawing.Point(240, 31);
             this.lblRezervacije.Name = "lblRezervacije";
             this.lblRezervacije.Size = new System.Drawing.Size(79, 16);
             this.lblRezervacije.TabIndex = 5;
@@ -88,7 +88,7 @@
             // lblServisi
             // 
             this.lblServisi.AutoSize = true;
-            this.lblServisi.Location = new System.Drawing.Point(304, 58);
+            this.lblServisi.Location = new System.Drawing.Point(385, 31);
             this.lblServisi.Name = "lblServisi";
             this.lblServisi.Size = new System.Drawing.Size(48, 16);
             this.lblServisi.TabIndex = 6;
@@ -97,33 +97,33 @@
             // lblIzvještaj
             // 
             this.lblIzvještaj.AutoSize = true;
-            this.lblIzvještaj.Location = new System.Drawing.Point(415, 58);
+            this.lblIzvještaj.Location = new System.Drawing.Point(486, 31);
             this.lblIzvještaj.MaximumSize = new System.Drawing.Size(100, 100);
             this.lblIzvještaj.Name = "lblIzvještaj";
             this.lblIzvještaj.Size = new System.Drawing.Size(55, 16);
             this.lblIzvještaj.TabIndex = 7;
             this.lblIzvještaj.Text = "Izvještaj";
             // 
-            // dgvStudents
+            // dgvRezervacije
             // 
-            this.dgvStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvRezervacije.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStudents.Location = new System.Drawing.Point(24, 78);
-            this.dgvStudents.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvStudents.Name = "dgvStudents";
-            this.dgvStudents.RowHeadersWidth = 51;
-            this.dgvStudents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvStudents.Size = new System.Drawing.Size(551, 291);
-            this.dgvStudents.TabIndex = 8;
+            this.dgvRezervacije.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRezervacije.Location = new System.Drawing.Point(16, 78);
+            this.dgvRezervacije.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvRezervacije.Name = "dgvRezervacije";
+            this.dgvRezervacije.RowHeadersWidth = 51;
+            this.dgvRezervacije.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvRezervacije.Size = new System.Drawing.Size(953, 291);
+            this.dgvRezervacije.TabIndex = 8;
             // 
             // FrmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(672, 436);
-            this.Controls.Add(this.dgvStudents);
+            this.ClientSize = new System.Drawing.Size(982, 436);
+            this.Controls.Add(this.dgvRezervacije);
             this.Controls.Add(this.lblIzvještaj);
             this.Controls.Add(this.lblServisi);
             this.Controls.Add(this.lblRezervacije);
@@ -131,11 +131,11 @@
             this.Controls.Add(this.lblKorisnik);
             this.Controls.Add(this.lblImeSustava);
             this.Controls.Add(this.btnOdjava);
-            this.MaximumSize = new System.Drawing.Size(819, 492);
+            this.MaximumSize = new System.Drawing.Size(1000, 1000);
             this.Name = "FrmAdmin";
             this.Text = "FrmAdmin";
             this.Load += new System.EventHandler(this.FrmAdmin_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRezervacije)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,6 +150,6 @@
         private System.Windows.Forms.Label lblRezervacije;
         private System.Windows.Forms.Label lblServisi;
         private System.Windows.Forms.Label lblIzvještaj;
-        private System.Windows.Forms.DataGridView dgvStudents;
+        private System.Windows.Forms.DataGridView dgvRezervacije;
     }
 }
