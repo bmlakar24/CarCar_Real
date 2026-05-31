@@ -35,6 +35,8 @@
             this.lblKorisnikZap = new System.Windows.Forms.Label();
             this.lblImeSustava = new System.Windows.Forms.Label();
             this.btnOdjava = new System.Windows.Forms.Button();
+            this.dgvRezervacijeZap = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRezervacijeZap)).BeginInit();
             this.SuspendLayout();
             // 
             // lblIzvještaj
@@ -102,11 +104,26 @@
             this.btnOdjava.UseVisualStyleBackColor = true;
             this.btnOdjava.Click += new System.EventHandler(this.btnOdjava_Click);
             // 
+            // dgvRezervacijeZap
+            // 
+            this.dgvRezervacijeZap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvRezervacijeZap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRezervacijeZap.Location = new System.Drawing.Point(8, 80);
+            this.dgvRezervacijeZap.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvRezervacijeZap.Name = "dgvRezervacijeZap";
+            this.dgvRezervacijeZap.RowHeadersWidth = 51;
+            this.dgvRezervacijeZap.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvRezervacijeZap.Size = new System.Drawing.Size(953, 291);
+            this.dgvRezervacijeZap.TabIndex = 15;
+            // 
             // FrmZaposlenik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(968, 450);
+            this.Controls.Add(this.dgvRezervacijeZap);
             this.Controls.Add(this.lblIzvještaj);
             this.Controls.Add(this.lblServisi);
             this.Controls.Add(this.lblRezervacije);
@@ -116,6 +133,8 @@
             this.Controls.Add(this.btnOdjava);
             this.Name = "FrmZaposlenik";
             this.Text = "FrmZaposlenik";
+            this.Load += new System.EventHandler(this.FrmZaposlenik_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRezervacijeZap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,5 +149,6 @@
         private System.Windows.Forms.Label lblKorisnikZap;
         private System.Windows.Forms.Label lblImeSustava;
         private System.Windows.Forms.Button btnOdjava;
+        private System.Windows.Forms.DataGridView dgvRezervacijeZap;
     }
 }

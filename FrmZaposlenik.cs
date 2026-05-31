@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CarCar.Repositories;
 
 namespace CarCar
 {
@@ -23,6 +24,40 @@ namespace CarCar
             Hide();
             frmLogin.ShowDialog();
             Close();
+        }
+
+        private void FrmZaposlenik_Load(object sender, EventArgs e)
+        {
+            UcitajRezervacijeZaposlenik();
+        }
+        private void UcitajRezervacijeZaposlenik()
+        {
+            var rezervacije = RezervacijaRepository.GetRezervacije();
+
+            var zaPrikaz = rezervacije.Select(r => new
+            {
+                Id = r.Id,
+                VrijemeOd = r.VrijemeOd,
+                VrijemeDo = r.VrijemeDo,
+                Status = r.Status,
+
+                Vozilo = r.Vozilo != null ? r.Vozilo.Registracija : "-",
+                Zaposlenik = r.Zaposlenik != null ? r.Zaposlenik.Ime + " " + r.Zaposlenik.Prezime : "-",
+                OIBKlijenta = r.OIBKlijenta,
+                CijenaNajma = r.CijenaNajma
+            }).ToList();
+
+            dgvRezervacijeZap.DataSource = zaPrikaz;
+
+            if (dgvRezervacijeZap.Columns.Count > 0)
+            {
+                dgvRezervacijeZap.Columns["VrijemeOd"].HeaderText = "Od";
+                dgvRezervacijeZap.Columns["VrijemeDo"].HeaderText = "Do";
+                dgvRezervacijeZap.Columns["OIBKlijenta"].HeaderText = "OIB Klijenta";
+                dgvRezervacijeZap.Columns["CijenaNajma"].HeaderText = "Cijena Najma";
+
+                dgvRezervacijeZap.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
         }
     }
 }
