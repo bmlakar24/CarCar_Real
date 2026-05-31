@@ -46,7 +46,7 @@
             this.lblServisi.Size = new System.Drawing.Size(48, 16);
             this.lblServisi.TabIndex = 13;
             this.lblServisi.Text = "Servisi";
-            
+            this.lblServisi.Click += new System.EventHandler(this.lblServisi_Click);
             // 
             // lblRezervacije
             // 
@@ -56,6 +56,7 @@
             this.lblRezervacije.Size = new System.Drawing.Size(79, 16);
             this.lblRezervacije.TabIndex = 12;
             this.lblRezervacije.Text = "Rezervacije";
+            this.lblRezervacije.Click += new System.EventHandler(this.lblRezervacije_Click);
             // 
             // label2
             // 

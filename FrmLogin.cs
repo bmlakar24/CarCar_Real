@@ -8,8 +8,8 @@ namespace CarCar
     {
         string username_admin= "admin";
         string password_admin = "admin";
-        string username_zap = "zaposlenik";
-        string password_zap = "zaposlenik";
+        string username_zap = "zap";
+        string password_zap = "zap";
 
         public FrmLogin()
         {

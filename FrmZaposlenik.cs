@@ -87,5 +87,11 @@ namespace CarCar
                 dgvRezervacijeZap.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
         }
+
+        private void lblRezervacije_Click(object sender, EventArgs e)
+        { 
+            UcitajRezervacije();
+        }
+
     }
 }
