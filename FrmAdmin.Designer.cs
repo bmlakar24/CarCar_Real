@@ -36,6 +36,8 @@
             this.lblServisi = new System.Windows.Forms.Label();
             this.lblIzvještaj = new System.Windows.Forms.Label();
             this.dgvRezervacije = new System.Windows.Forms.DataGridView();
+            this.btnDodaj = new System.Windows.Forms.Button();
+            this.btnObrisi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRezervacije)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,11 +122,33 @@
             this.dgvRezervacije.Size = new System.Drawing.Size(953, 291);
             this.dgvRezervacije.TabIndex = 8;
             // 
+            // btnDodaj
+            // 
+            this.btnDodaj.Location = new System.Drawing.Point(34, 385);
+            this.btnDodaj.Name = "btnDodaj";
+            this.btnDodaj.Size = new System.Drawing.Size(75, 23);
+            this.btnDodaj.TabIndex = 10;
+            this.btnDodaj.Text = "Dodaj termin";
+            this.btnDodaj.UseVisualStyleBackColor = true;
+            this.btnDodaj.Click += new System.EventHandler(this.btnDodaj_Click);
+            // 
+            // btnObrisi
+            // 
+            this.btnObrisi.Location = new System.Drawing.Point(125, 385);
+            this.btnObrisi.Name = "btnObrisi";
+            this.btnObrisi.Size = new System.Drawing.Size(88, 26);
+            this.btnObrisi.TabIndex = 11;
+            this.btnObrisi.Text = "Obriši";
+            this.btnObrisi.UseVisualStyleBackColor = true;
+            this.btnObrisi.Click += new System.EventHandler(this.btnObrisi_Click);
+            // 
             // FrmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 436);
+            this.Controls.Add(this.btnObrisi);
+            this.Controls.Add(this.btnDodaj);
             this.Controls.Add(this.dgvRezervacije);
             this.Controls.Add(this.lblIzvještaj);
             this.Controls.Add(this.lblServisi);
@@ -154,5 +178,7 @@
         private System.Windows.Forms.Label lblServisi;
         private System.Windows.Forms.Label lblIzvještaj;
         private System.Windows.Forms.DataGridView dgvRezervacije;
+        private System.Windows.Forms.Button btnDodaj;
+        private System.Windows.Forms.Button btnObrisi;
     }
 }

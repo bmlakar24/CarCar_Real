@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CarCar.Models;
 using CarCar.Repositories;
 
 namespace CarCar
 {
     public partial class FrmAdmin : Form
     {
+        private string trenutniPrikaz = "Rezervacije";
         public FrmAdmin()
         {
             InitializeComponent();
@@ -62,6 +64,7 @@ namespace CarCar
 
         private void lblServisi_Click(object sender, EventArgs e)
         {
+            trenutniPrikaz = "Servisi";
             UcitajServise();
         }
         private void UcitajServise()
@@ -76,7 +79,7 @@ namespace CarCar
                 Vozilo = r.Vozilo != null ? r.Vozilo.Registracija : "-",
                 Zaposlenik = r.Zaposlenik != null ? r.Zaposlenik.Ime + " " + r.Zaposlenik.Prezime : "-",
                 OIBKlijenta = r.OIBKlijenta,
-                TrošakServisa= r.Vozilo.TrošakServisa,
+                TrošakServisa = r.Vozilo.TrošakServisa,
             }).ToList();
             dgvRezervacije.DataSource = zaPrikaz;
             if (dgvRezervacije.Columns.Count > 0)
@@ -91,7 +94,48 @@ namespace CarCar
 
         private void lblRezervacije_Click(object sender, EventArgs e)
         {
+            trenutniPrikaz = "Rezervacije";
             UcitajRezervacije();
         }
+
+        private void btnDodaj_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnObrisi_Click(object sender, EventArgs e)
+        {
+            if (dgvRezervacije.SelectedRows.Count > 0)
+            {
+                
+                int idZaBrisanje = Convert.ToInt32(dgvRezervacije.SelectedRows[0].Cells["Id"].Value);
+
+                var rezultat = MessageBox.Show($"Jeste li sigurni da želite obrisati stavku ID: {idZaBrisanje}?",
+                                               "Potvrda", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (rezultat == DialogResult.Yes)
+                {
+                    
+                    TerminRepository.DeleteTermin(idZaBrisanje);
+
+                    
+                    if (trenutniPrikaz == "Servisi")
+                    {
+                        dgvRezervacije.DataSource = ServisiRepository.GetServisi();
+                    }
+                    else
+                    {
+                        dgvRezervacije.DataSource = RezervacijaRepository.GetRezervacije();
+                    }
+
+                    MessageBox.Show("Uspješno obrisano!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Molimo odaberite cijeli redak za brisanje.");
+            }
+        }
+
+   
     }
 }
