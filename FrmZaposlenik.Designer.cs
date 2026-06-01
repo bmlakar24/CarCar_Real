@@ -119,6 +119,7 @@
             this.btnDodajZap.TabIndex = 16;
             this.btnDodajZap.Text = "Dodaj termin";
             this.btnDodajZap.UseVisualStyleBackColor = true;
+            this.btnDodajZap.Click += new System.EventHandler(this.btnDodajZap_Click);
             // 
             // btnObrisiZap
             // 

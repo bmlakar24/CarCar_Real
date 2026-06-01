@@ -92,7 +92,8 @@ namespace CarCar
         }
 
         private void lblRezervacije_Click(object sender, EventArgs e)
-        { 
+        {
+            trenutniPrikaz = "Rezervacije";
             UcitajRezervacije();
         }
 
@@ -127,6 +128,25 @@ namespace CarCar
             else
             {
                 MessageBox.Show("Molimo odaberite cijeli redak za brisanje.");
+            }
+        }
+
+        private void btnDodajZap_Click(object sender, EventArgs e)
+        {
+            FrmUnosTermina forma = new FrmUnosTermina();
+
+            if (forma.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show("Termin uspješno spremljen!", "Uspjeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (trenutniPrikaz == "Servisi")
+                {
+                    dgvRezervacijeZap.DataSource = ServisiRepository.GetServisi();
+                }
+                else
+                {
+                    dgvRezervacijeZap.DataSource = RezervacijaRepository.GetRezervacije();
+                }
             }
         }
     }
