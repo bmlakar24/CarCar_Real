@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CarCar.Models;
 using CarCar.Repositories;
 
 namespace CarCar
@@ -146,6 +147,33 @@ namespace CarCar
                 else
                 {
                     dgvRezervacijeZap.DataSource = RezervacijaRepository.GetRezervacije();
+                }
+            }
+        }
+
+        private void btnUrediZap_Click(object sender, EventArgs e)
+        {
+
+            if (dgvRezervacijeZap.SelectedRows.Count > 0)
+            {
+                int idZaUredivanje = Convert.ToInt32(dgvRezervacijeZap.SelectedRows[0].Cells["Id"].Value);
+                Termin odabrani = RezervacijaRepository.GetTermin(idZaUredivanje);
+                if (odabrani != null)
+                {
+                    FrmUnosTermina forma = new FrmUnosTermina(odabrani);
+                    if (forma.ShowDialog() == DialogResult.OK)
+                    {
+                        MessageBox.Show("Termin uspješno spremljen!", "Uspjeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        if (trenutniPrikaz == "Servisi")
+                        {
+                            dgvRezervacijeZap.DataSource = ServisiRepository.GetServisi();
+                        }
+                        else
+                        {
+                            dgvRezervacijeZap.DataSource = RezervacijaRepository.GetRezervacije();
+                        }
+                    }
                 }
             }
         }

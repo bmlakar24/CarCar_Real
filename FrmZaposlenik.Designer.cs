@@ -37,6 +37,7 @@
             this.dgvRezervacijeZap = new System.Windows.Forms.DataGridView();
             this.btnDodajZap = new System.Windows.Forms.Button();
             this.btnObrisiZap = new System.Windows.Forms.Button();
+            this.btnUrediZap = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRezervacijeZap)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,11 +132,22 @@
             this.btnObrisiZap.UseVisualStyleBackColor = true;
             this.btnObrisiZap.Click += new System.EventHandler(this.btnObrisiZap_Click);
             // 
+            // btnUrediZap
+            // 
+            this.btnUrediZap.Location = new System.Drawing.Point(221, 397);
+            this.btnUrediZap.Name = "btnUrediZap";
+            this.btnUrediZap.Size = new System.Drawing.Size(75, 23);
+            this.btnUrediZap.TabIndex = 18;
+            this.btnUrediZap.Text = "Uredi";
+            this.btnUrediZap.UseVisualStyleBackColor = true;
+            this.btnUrediZap.Click += new System.EventHandler(this.btnUrediZap_Click);
+            // 
             // FrmZaposlenik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(968, 450);
+            this.Controls.Add(this.btnUrediZap);
             this.Controls.Add(this.btnObrisiZap);
             this.Controls.Add(this.btnDodajZap);
             this.Controls.Add(this.dgvRezervacijeZap);
@@ -164,5 +176,6 @@
         private System.Windows.Forms.DataGridView dgvRezervacijeZap;
         private System.Windows.Forms.Button btnDodajZap;
         private System.Windows.Forms.Button btnObrisiZap;
+        private System.Windows.Forms.Button btnUrediZap;
     }
 }
