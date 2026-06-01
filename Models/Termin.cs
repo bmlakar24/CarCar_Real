@@ -58,5 +58,7 @@ namespace CarCar.Models
                 return (dani * Vozilo.CijenaDan) + (sati * Vozilo.CijenaSat);
             }
         }
+
+        public string Registracija { get; internal set; }
     }
 }
