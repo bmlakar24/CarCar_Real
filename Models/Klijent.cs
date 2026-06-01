@@ -17,5 +17,9 @@ namespace CarCar.Models
         public string OIB { get; set; }
 
         public List<Termin> Rezervacije { get; set; } = new List<Termin>();
+        public override string ToString()
+        {
+            return $"{Ime} {Prezime}";
+        }
     }
 }

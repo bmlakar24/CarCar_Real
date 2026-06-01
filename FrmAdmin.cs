@@ -15,6 +15,7 @@ namespace CarCar
     public partial class FrmAdmin : Form
     {
         private string trenutniPrikaz = "Rezervacije";
+        private List<Termin> SviTermini = new List<Termin>();
         public FrmAdmin()
         {
             InitializeComponent();
@@ -122,7 +123,7 @@ namespace CarCar
         {
             if (dgvRezervacije.SelectedRows.Count > 0)
             {
-                
+
                 int idZaBrisanje = Convert.ToInt32(dgvRezervacije.SelectedRows[0].Cells["Id"].Value);
 
                 var rezultat = MessageBox.Show($"Jeste li sigurni da želite obrisati stavku ID: {idZaBrisanje}?",
@@ -130,10 +131,10 @@ namespace CarCar
 
                 if (rezultat == DialogResult.Yes)
                 {
-                    
+
                     TerminRepository.DeleteTermin(idZaBrisanje);
 
-                    
+
                     if (trenutniPrikaz == "Servisi")
                     {
                         dgvRezervacije.DataSource = ServisiRepository.GetServisi();
@@ -176,6 +177,87 @@ namespace CarCar
                     }
                 }
             }
+        }
+
+        private void txtPretraga_TextChanged(object sender, EventArgs e)
+        {
+            string tekst = txtPretraga.Text;
+            if (string.IsNullOrWhiteSpace(tekst))
+            {
+                if (trenutniPrikaz == "Servisi")
+                {
+                    dgvRezervacije.DataSource = ServisiRepository.GetServisi();
+                }
+                else
+                {
+                    dgvRezervacije.DataSource = RezervacijaRepository.GetRezervacije();
+                }
+            }
+            else
+            {
+                if (trenutniPrikaz == "Servisi")
+                {
+                    dgvRezervacije.DataSource = TerminRepository.PretraziServise(tekst);
+                }
+                else
+                { 
+                    dgvRezervacije.DataSource = TerminRepository.PretraziTermine(tekst);
+                }
+
+            }
+        }
+        private void FormatirajTablicu()
+        {
+
+
+            if (dgvRezervacije.DataSource == null) return;
+
+
+            if (dgvRezervacije.Columns.Contains("Id")) dgvRezervacije.Columns["Id"].HeaderText = "Id";
+
+            if (dgvRezervacije.Columns.Contains("VrijemeOd")) dgvRezervacije.Columns["VrijemeOd"].HeaderText = "Od";
+            if (dgvRezervacije.Columns.Contains("VrijemeDo")) dgvRezervacije.Columns["VrijemeDo"].HeaderText = "Do";
+            if (dgvRezervacije.Columns.Contains("Od")) dgvRezervacije.Columns["Od"].HeaderText = "Od";
+            if (dgvRezervacije.Columns.Contains("Do")) dgvRezervacije.Columns["Do"].HeaderText = "Do";
+
+            if (dgvRezervacije.Columns.Contains("Status")) dgvRezervacije.Columns["Status"].HeaderText = "Status";
+            if (dgvRezervacije.Columns.Contains("Vozilo")) dgvRezervacije.Columns["Vozilo"].HeaderText = "Vozilo";
+            if (dgvRezervacije.Columns.Contains("Zaposlenik")) dgvRezervacije.Columns["Zaposlenik"].HeaderText = "Zaposlenik";
+
+            if (dgvRezervacije.Columns.Contains("OIBKlijenta")) dgvRezervacije.Columns["OIBKlijenta"].HeaderText = "OIB Klijenta";
+            if (dgvRezervacije.Columns.Contains("OIB_Klijenta")) dgvRezervacije.Columns["OIB_Klijenta"].HeaderText = "OIB Klijenta";
+
+            string[] stupciZaSkrivanje = { "ZaposlenikID", "IdZaposlenika", "VoziloId", "IdVozila", "Klijent", "Tip", "OpisKvara" };
+            foreach (string stupac in stupciZaSkrivanje)
+            {
+                if (dgvRezervacije.Columns.Contains(stupac))
+                {
+                    dgvRezervacije.Columns[stupac].Visible = false;
+                }
+            }
+
+            if (trenutniPrikaz == "Servisi")
+            {
+                if (dgvRezervacije.Columns.Contains("CijenaNajma")) dgvRezervacije.Columns["CijenaNajma"].Visible = false;
+
+                if (dgvRezervacije.Columns.Contains("TrosakServisa"))
+                {
+                    dgvRezervacije.Columns["TrosakServisa"].Visible = true;
+                    dgvRezervacije.Columns["TrosakServisa"].HeaderText = "Trošak Servisa";
+                }
+            }
+            else
+            {
+                if (dgvRezervacije.Columns.Contains("TrosakServisa")) dgvRezervacije.Columns["TrosakServisa"].Visible = false;
+
+                if (dgvRezervacije.Columns.Contains("CijenaNajma"))
+                {
+                    dgvRezervacije.Columns["CijenaNajma"].Visible = true;
+                    dgvRezervacije.Columns["CijenaNajma"].HeaderText = "Cijena Najma";
+                }
+            }
+
+            dgvRezervacije.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
     }
 }

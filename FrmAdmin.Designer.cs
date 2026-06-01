@@ -39,6 +39,8 @@
             this.btnDodaj = new System.Windows.Forms.Button();
             this.btnObrisi = new System.Windows.Forms.Button();
             this.btnUredi = new System.Windows.Forms.Button();
+            this.txtPretraga = new System.Windows.Forms.TextBox();
+            this.lblPretraga = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRezervacije)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,7 +117,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvRezervacije.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRezervacije.Location = new System.Drawing.Point(16, 78);
+            this.dgvRezervacije.Location = new System.Drawing.Point(13, 87);
             this.dgvRezervacije.Margin = new System.Windows.Forms.Padding(4);
             this.dgvRezervacije.Name = "dgvRezervacije";
             this.dgvRezervacije.RowHeadersWidth = 51;
@@ -153,11 +155,30 @@
             this.btnUredi.UseVisualStyleBackColor = true;
             this.btnUredi.Click += new System.EventHandler(this.btnUredi_Click);
             // 
+            // txtPretraga
+            // 
+            this.txtPretraga.Location = new System.Drawing.Point(104, 58);
+            this.txtPretraga.Name = "txtPretraga";
+            this.txtPretraga.Size = new System.Drawing.Size(147, 22);
+            this.txtPretraga.TabIndex = 13;
+            this.txtPretraga.TextChanged += new System.EventHandler(this.txtPretraga_TextChanged);
+            // 
+            // lblPretraga
+            // 
+            this.lblPretraga.AutoSize = true;
+            this.lblPretraga.Location = new System.Drawing.Point(34, 58);
+            this.lblPretraga.Name = "lblPretraga";
+            this.lblPretraga.Size = new System.Drawing.Size(59, 16);
+            this.lblPretraga.TabIndex = 14;
+            this.lblPretraga.Text = "Pretraga";
+            // 
             // FrmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 436);
+            this.Controls.Add(this.lblPretraga);
+            this.Controls.Add(this.txtPretraga);
             this.Controls.Add(this.btnUredi);
             this.Controls.Add(this.btnObrisi);
             this.Controls.Add(this.btnDodaj);
@@ -193,5 +214,7 @@
         private System.Windows.Forms.Button btnDodaj;
         private System.Windows.Forms.Button btnObrisi;
         private System.Windows.Forms.Button btnUredi;
+        private System.Windows.Forms.TextBox txtPretraga;
+        private System.Windows.Forms.Label lblPretraga;
     }
 }
