@@ -33,5 +33,20 @@ namespace CarCar.Repositories
             DB.ExecuteCommand(sql);
             DB.CloseConnection();
         }
+        public static void Update(Termin t)
+        {
+            string sql = $@"UPDATE Rezervacija 
+                    SET VrijemeOd = '{t.VrijemeOd:yyyy-MM-dd HH:mm:ss}', 
+                        VrijemeDO = '{t.VrijemeDo:yyyy-MM-dd HH:mm:ss}', 
+                        Status = '{t.Status}', 
+                        OIB_Klijenta = '{t.Klijent.OIB}', 
+                        Zaposlenik = {t.Zaposlenik.Id}, 
+                        Vozilo = {t.Vozilo.Id}, 
+                        TipNajma = '{t.Tip}' 
+                    WHERE IdRez = {t.Id}";
+            DB.OpenConnection();
+            DB.ExecuteCommand(sql);
+            DB.CloseConnection();
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace CarCar.Repositories
         public static Termin GetTermin(int id)
         {
             Termin termin = null;
-            string sql = $"SELECT * FROM Termin WHERE Id = {id}";
+            string sql = $"SELECT * FROM Rezervacija WHERE IdRez = {id}";
             DB.OpenConnection();
             var reader = DB.GetDataReader(sql);
 

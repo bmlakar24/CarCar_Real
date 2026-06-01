@@ -38,6 +38,7 @@
             this.dgvRezervacije = new System.Windows.Forms.DataGridView();
             this.btnDodaj = new System.Windows.Forms.Button();
             this.btnObrisi = new System.Windows.Forms.Button();
+            this.btnUredi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRezervacije)).BeginInit();
             this.SuspendLayout();
             // 
@@ -142,11 +143,22 @@
             this.btnObrisi.UseVisualStyleBackColor = true;
             this.btnObrisi.Click += new System.EventHandler(this.btnObrisi_Click);
             // 
+            // btnUredi
+            // 
+            this.btnUredi.Location = new System.Drawing.Point(243, 387);
+            this.btnUredi.Name = "btnUredi";
+            this.btnUredi.Size = new System.Drawing.Size(75, 23);
+            this.btnUredi.TabIndex = 12;
+            this.btnUredi.Text = "Uredi";
+            this.btnUredi.UseVisualStyleBackColor = true;
+            this.btnUredi.Click += new System.EventHandler(this.btnUredi_Click);
+            // 
             // FrmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 436);
+            this.Controls.Add(this.btnUredi);
             this.Controls.Add(this.btnObrisi);
             this.Controls.Add(this.btnDodaj);
             this.Controls.Add(this.dgvRezervacije);
@@ -180,5 +192,6 @@
         private System.Windows.Forms.DataGridView dgvRezervacije;
         private System.Windows.Forms.Button btnDodaj;
         private System.Windows.Forms.Button btnObrisi;
+        private System.Windows.Forms.Button btnUredi;
     }
 }

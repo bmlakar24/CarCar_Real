@@ -14,11 +14,16 @@ namespace CarCar
 {
     public partial class FrmUnosTermina : Form
     {
+        private Termin odabraniTermin;
         public FrmUnosTermina()
         {
             InitializeComponent();
         }
-
+        public FrmUnosTermina(Termin terminZaUredivanje)
+        {
+            InitializeComponent();
+            odabraniTermin = terminZaUredivanje;
+        }
 
         private void FrmUnosTermina_Load(object sender, EventArgs e)
         {
@@ -37,34 +42,43 @@ namespace CarCar
 
             cmbZaposlenik.DataSource = ZaposlenikRepository.GetZaposlenici();
             cmbZaposlenik.DisplayMember = "Ime";
+
+            if (odabraniTermin != null)
+            {
+                dtpOd.Value = odabraniTermin.VrijemeOd;
+                dtpDo.Value = odabraniTermin.VrijemeDo;
+                cmbTip.SelectedItem = odabraniTermin.Tip;
+                cmbStatus.SelectedItem = odabraniTermin.Status;
+                cmbVozilo.SelectedItem = odabraniTermin.Vozilo;
+                cmbKlijent.SelectedItem = odabraniTermin.Klijent;
+                cmbZaposlenik.SelectedItem = odabraniTermin.Zaposlenik;
+            }
+            else
+            {
+                cmbTip.SelectedIndex = 0;
+                cmbStatus.SelectedIndex = 0;
+            }
         }
 
         private void btnSpremi_Click(object sender, EventArgs e)
         {
-            if (cmbVozilo.SelectedItem == null || cmbKlijent.SelectedItem == null ||
-                cmbZaposlenik.SelectedItem == null || cmbTip.SelectedItem == null)
+            Termin t = odabraniTermin ?? new Termin();
+
+            t.VrijemeOd = dtpOd.Value;
+            t.VrijemeDo = dtpDo.Value;
+            t.Status = cmbStatus.SelectedItem.ToString();
+            t.Tip = cmbTip.SelectedItem.ToString();
+            t.Vozilo = (Vozilo)cmbVozilo.SelectedItem;
+            t.Klijent = (Klijent)cmbKlijent.SelectedItem;
+            t.Zaposlenik = (Zaposlenik)cmbZaposlenik.SelectedItem;
+            if (odabraniTermin != null)
             {
-                MessageBox.Show("Sva polja moraju biti odabrana!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                TerminRepository.Update(t);
             }
-
-            
-            Termin noviTermin = new Termin
+            else
             {
-                VrijemeOd = dtpOd.Value,
-                VrijemeDo = dtpDo.Value,
-
-               
-                Tip = cmbTip.SelectedItem.ToString(),
-                Status = cmbStatus.SelectedItem.ToString(),
-
-                Vozilo = (Vozilo)cmbVozilo.SelectedItem,
-                Klijent = (Klijent)cmbKlijent.SelectedItem,
-                Zaposlenik = (Zaposlenik)cmbZaposlenik.SelectedItem
-            };
-
-            
-            TerminRepository.AddTermin(noviTermin);
+                TerminRepository.AddTermin(t);
+            }
 
             this.DialogResult = DialogResult.OK;
             this.Close();

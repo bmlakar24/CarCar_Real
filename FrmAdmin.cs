@@ -152,6 +152,30 @@ namespace CarCar
             }
         }
 
-   
+        private void btnUredi_Click(object sender, EventArgs e)
+        {
+            if (dgvRezervacije.SelectedRows.Count > 0)
+            {
+                int idZaUredivanje = Convert.ToInt32(dgvRezervacije.SelectedRows[0].Cells["Id"].Value);
+                Termin odabrani = RezervacijaRepository.GetTermin(idZaUredivanje);
+                if (odabrani != null)
+                {
+                    FrmUnosTermina forma = new FrmUnosTermina(odabrani);
+                    if (forma.ShowDialog() == DialogResult.OK)
+                    {
+                        MessageBox.Show("Termin uspješno spremljen!", "Uspjeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        if (trenutniPrikaz == "Servisi")
+                        {
+                            dgvRezervacije.DataSource = ServisiRepository.GetServisi();
+                        }
+                        else
+                        {
+                            dgvRezervacije.DataSource = RezervacijaRepository.GetRezervacije();
+                        }
+                    }
+                }
+            }
+        }
     }
 }
