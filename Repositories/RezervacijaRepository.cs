@@ -11,10 +11,10 @@ namespace CarCar.Repositories
 {
     public class RezervacijaRepository
     {
-        public static Termin GetTermin()
+        public static Termin GetTermin(int id)
         {
             Termin termin = null;
-            string sql = $"SELECT * FROM Rezervacija";
+            string sql = $"SELECT * FROM Rezervacija WHERE IdRez = {id}";
             DB.OpenConnection();
             var reader = DB.GetDataReader(sql);
 

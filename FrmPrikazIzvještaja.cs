@@ -9,42 +9,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CarCar.Models;
 using CarCar.Repositories;
-using System.Linq;
 
 namespace CarCar
 {
     public partial class FrmPrikazIzvještaja : Form
     {
-        private string Regi;
-        private DateTime Od;
-        private DateTime Do;
+        private string Registracija;
+        private DateTime VrijemeOd;
+        private DateTime VrijemeDo;
         public FrmPrikazIzvještaja(string Reg, DateTime vrijemeOd, DateTime vrijemeDo)
         {
             InitializeComponent();
-            Regi = Reg;
-            Od = vrijemeOd;
-            Do = vrijemeDo;
+            Registracija = Reg;
+            VrijemeOd = vrijemeOd;
+            VrijemeDo = vrijemeDo;
         }
 
         private void FrmPrikazIzvještaja_Load(object sender, EventArgs e)
         {
-            var ter = RezervacijaRepository.GetRezervacije(); 
-            var ser = ServisiRepository.GetServisi();
-
-            decimal ukupnaZarada = ter
-          .Where(t => t.Registracija == Regi && t.VrijemeOd >= Od && t.VrijemeDo <= Do)
-         .Where(t => t.CijenaNajma.HasValue) 
-            .Sum(t => t.CijenaNajma.Value);
-
-            decimal ukupniTrosak = ter
-        .Where(t=> t.Registracija == Regi && t.VrijemeOd >= Od && t.VrijemeDo <= Do)
-        .Sum(t => t.Vozilo.TrošakServisa);
-            decimal netoDobit = ukupnaZarada - ukupniTrosak;
+            var podaci = RezervacijaRepository.GetFinancijskiIzvjestaj(Registracija);
 
 
-            lblZarada.Text = "Ukupna Zarada: " + ukupnaZarada.ToString("C2");
-            lblTrosak.Text = "Trošak: " + ukupniTrosak.ToString("C2");
-            lblDobit.Text = "Dobit: " + netoDobit.ToString("C2");
+        
+            lblVozilo.Text = "Izvještaj za vozilo: " + podaci.Registracija;
+            lblZarada.Text = "Ukupna Zarada: " + podaci.UkupnaZarada.ToString("C2");
+            lblTrosak.Text = "Trošak: " + podaci.UkupniTrosak.ToString("C2");
+            lblDobit.Text = "Dobit: " + podaci.NetoDobit.ToString("C2");
         }
 
         
