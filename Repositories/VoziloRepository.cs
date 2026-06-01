@@ -8,7 +8,7 @@ using DBLayer;
 
 namespace CarCar.Repositories
 {
-    internal class VoziloRepository
+    public class VoziloRepository
     {
         public static List<Vozilo> GetVozila()
         {

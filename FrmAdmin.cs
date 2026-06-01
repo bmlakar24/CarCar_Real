@@ -18,6 +18,7 @@ namespace CarCar
         public FrmAdmin()
         {
             InitializeComponent();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -100,6 +101,21 @@ namespace CarCar
 
         private void btnDodaj_Click(object sender, EventArgs e)
         {
+            FrmUnosTermina forma = new FrmUnosTermina();
+
+            if (forma.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show("Termin uspješno spremljen!", "Uspjeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (trenutniPrikaz == "Servisi")
+                {
+                    dgvRezervacije.DataSource = ServisiRepository.GetServisi();
+                }
+                else
+                {
+                    dgvRezervacije.DataSource = RezervacijaRepository.GetRezervacije();
+                }
+            }
         }
 
         private void btnObrisi_Click(object sender, EventArgs e)

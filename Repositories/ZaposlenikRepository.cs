@@ -8,7 +8,7 @@ using DBLayer;
 
 namespace CarCar.Repositories
 {
-    internal class ZaposlenikRepository
+    public class ZaposlenikRepository
     {
         public static List<Zaposlenik> GetZaposlenici()
         {
