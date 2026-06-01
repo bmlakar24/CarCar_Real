@@ -10,6 +10,8 @@ namespace CarCar.Repositories
 {
     public class TerminRepository
     {
+        private const string V = "TrošakServisa";
+
         public static void AddTermin(Termin t)
         {
             string sql = $@"INSERT INTO Rezervacija (VrijemeOd, VrijemeDO, Status, OIB_Klijenta, Zaposlenik, Vozilo, TipNajma) 
@@ -110,6 +112,7 @@ namespace CarCar.Repositories
                            r.Status,
                            r.TipNajma,
                            r.OIB_Klijenta,
+                           v.TrošakServisa,
                            v.Registracija,
                            z.Ime AS ImeZaposlenika, 
                            z.Prezime AS PrezimeZaposlenika 
@@ -134,6 +137,7 @@ namespace CarCar.Repositories
                 {
                     t.Vozilo = new Vozilo();
                     t.Vozilo.Registracija = reader["Registracija"].ToString();
+                    t.Vozilo.TrošakServisa = Convert.ToDecimal(reader["TrošakServisa"]);
                 }
                 if (reader["ImeZaposlenika"] != DBNull.Value && reader["PrezimeZaposlenika"] != DBNull.Value)
                 {

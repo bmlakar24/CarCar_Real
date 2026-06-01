@@ -63,7 +63,6 @@ namespace CarCar
         private void btnSpremi_Click(object sender, EventArgs e)
         {
             Termin t = odabraniTermin ?? new Termin();
-
             t.VrijemeOd = dtpOd.Value;
             t.VrijemeDo = dtpDo.Value;
             t.Status = cmbStatus.SelectedItem.ToString();
@@ -78,6 +77,7 @@ namespace CarCar
             else
             {
                 TerminRepository.AddTermin(t);
+
             }
 
             this.DialogResult = DialogResult.OK;

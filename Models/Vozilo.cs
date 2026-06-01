@@ -20,6 +20,8 @@ namespace CarCar.Models
 
         public decimal TrošakServisa { get; set; }
 
+        public int BrojNajmova { get; set; }
+
         public List<Termin> Termini { get; set; } = new List<Termin>();
         public override string ToString()
         {

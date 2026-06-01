@@ -227,7 +227,7 @@ namespace CarCar
             if (dgvRezervacije.Columns.Contains("OIB_Klijenta")) dgvRezervacije.Columns["OIB_Klijenta"].HeaderText = "OIB Klijenta";
             if (dgvRezervacije.Columns.Contains("OIB_Klijenta")) dgvRezervacije.Columns["OIB_Klijenta"].HeaderText = "OIB Klijenta";
 
-            string[] stupciZaSkrivanje = { "ZaposlenikID", "IdZaposlenika", "VoziloId", "IdVozila", "Klijent", "Tip", "OpisKvara" };
+            string[] stupciZaSkrivanje = { "ZaposlenikID", "IdZaposlenika", "VoziloId", "IdVozila", "Klijent", "Tip" };
             foreach (string stupac in stupciZaSkrivanje)
             {
                 if (dgvRezervacije.Columns.Contains(stupac))
@@ -240,15 +240,16 @@ namespace CarCar
             {
                 if (dgvRezervacije.Columns.Contains("CijenaNajma")) dgvRezervacije.Columns["CijenaNajma"].Visible = false;
 
-                if (dgvRezervacije.Columns.Contains("TrosakServisa"))
+                if (dgvRezervacije.Columns.Contains("TrošakServisa"))
                 {
-                    dgvRezervacije.Columns["TrosakServisa"].Visible = true;
-                    dgvRezervacije.Columns["TrosakServisa"].HeaderText = "Trošak Servisa";
+                    dgvRezervacije.Columns["TrošakServisa"].Visible = true;
+                    dgvRezervacije.Columns["TrošakServisa"].HeaderText = "Trošak Servisa";
                 }
+
             }
-            else
+            else if(trenutniPrikaz=="Rezervacije")
             {
-                if (dgvRezervacije.Columns.Contains("TrosakServisa")) dgvRezervacije.Columns["TrosakServisa"].Visible = false;
+                if (dgvRezervacije.Columns.Contains("TrošakServisa")) dgvRezervacije.Columns["TrošakServisa"].Visible = false;
 
                 if (dgvRezervacije.Columns.Contains("CijenaNajma"))
                 {
