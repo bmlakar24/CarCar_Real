@@ -203,7 +203,7 @@ namespace CarCar
                 { 
                     dgvRezervacije.DataSource = TerminRepository.PretraziTermine(tekst);
                 }
-
+                FormatirajTablicu();
             }
         }
         private void FormatirajTablicu()
@@ -224,7 +224,7 @@ namespace CarCar
             if (dgvRezervacije.Columns.Contains("Vozilo")) dgvRezervacije.Columns["Vozilo"].HeaderText = "Vozilo";
             if (dgvRezervacije.Columns.Contains("Zaposlenik")) dgvRezervacije.Columns["Zaposlenik"].HeaderText = "Zaposlenik";
 
-            if (dgvRezervacije.Columns.Contains("OIBKlijenta")) dgvRezervacije.Columns["OIBKlijenta"].HeaderText = "OIB Klijenta";
+            if (dgvRezervacije.Columns.Contains("OIB_Klijenta")) dgvRezervacije.Columns["OIB_Klijenta"].HeaderText = "OIB Klijenta";
             if (dgvRezervacije.Columns.Contains("OIB_Klijenta")) dgvRezervacije.Columns["OIB_Klijenta"].HeaderText = "OIB Klijenta";
 
             string[] stupciZaSkrivanje = { "ZaposlenikID", "IdZaposlenika", "VoziloId", "IdVozila", "Klijent", "Tip", "OpisKvara" };

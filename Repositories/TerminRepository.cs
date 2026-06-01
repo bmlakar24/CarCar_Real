@@ -57,6 +57,7 @@ namespace CarCar.Repositories
                            r.VrijemeDO,
                            r.Status,
                            r.TipNajma,
+                           r.OIB_Klijenta,
                            v.Registracija,
                            z.Ime AS ImeZaposlenika, 
                            z.Prezime AS PrezimeZaposlenika 
@@ -88,6 +89,11 @@ namespace CarCar.Repositories
                     t.Zaposlenik.Ime = reader["ImeZaposlenika"].ToString();
                     t.Zaposlenik.Prezime = reader["PrezimeZaposlenika"].ToString();
                 }
+                if (reader["OIB_Klijenta"] != DBNull.Value)
+                {
+                    t.Klijent = new Klijent();
+                    t.Klijent.OIB = reader["OIB_Klijenta"].ToString();  
+                }
                     lista.Add(t);
             }
             reader.Close();
@@ -97,8 +103,25 @@ namespace CarCar.Repositories
         public static List<Termin> PretraziServise(string tekst)
         {
             List<Termin> lista = new List<Termin>();
-            string sql = $@"SELECT * from Rezervacija Where TipNajma='Servis' AND (Status LIKE '%{tekst}%'
-            OR Vozilo LIKE '%{tekst}%' OR Zaposlenik LIKE '%{tekst}%' OR OIB_Klijenta LIKE '%{tekst}%')";
+            string sql = $@"SELECT
+                           r.IdRez,
+                           r.VrijemeOd,
+                           r.VrijemeDO,
+                           r.Status,
+                           r.TipNajma,
+                           r.OIB_Klijenta,
+                           v.Registracija,
+                           z.Ime AS ImeZaposlenika, 
+                           z.Prezime AS PrezimeZaposlenika 
+                    FROM Rezervacija r
+                    LEFT JOIN Vozilo v ON r.Vozilo = v.IdVozila
+                    LEFT JOIN Zaposlenik z ON r.Zaposlenik = z.IdZaposlenik
+                    WHERE r.TipNajma = 'Servis' 
+                    AND (r.Status LIKE '%{tekst}%' 
+                         OR v.Registracija LIKE '%{tekst}%' 
+                         OR z.Ime LIKE '%{tekst}%' 
+                         OR z.Prezime LIKE '%{tekst}%' 
+                         OR r.OIB_Klijenta LIKE '%{tekst}%')";
 
 
             DB.OpenConnection();
@@ -107,6 +130,22 @@ namespace CarCar.Repositories
             while (reader.Read())
             {
                 Termin t = RezervacijaRepository.CreateObject(reader);
+                if (reader["Registracija"] != DBNull.Value)
+                {
+                    t.Vozilo = new Vozilo();
+                    t.Vozilo.Registracija = reader["Registracija"].ToString();
+                }
+                if (reader["ImeZaposlenika"] != DBNull.Value && reader["PrezimeZaposlenika"] != DBNull.Value)
+                {
+                    t.Zaposlenik = new Zaposlenik();
+                    t.Zaposlenik.Ime = reader["ImeZaposlenika"].ToString();
+                    t.Zaposlenik.Prezime = reader["PrezimeZaposlenika"].ToString();
+                }
+                if (reader["OIB_Klijenta"] != DBNull.Value)
+                {
+                    t.Klijent = new Klijent();
+                    t.Klijent.OIB = reader["OIB_Klijenta"].ToString();
+                }
                 lista.Add(t);
             }
             reader.Close();
