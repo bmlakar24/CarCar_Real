@@ -103,5 +103,29 @@ namespace CarCar.Repositories
 
             return termin;
         }
+        public static IzvjestajVozila GetFinancijskiIzvjestaj(string registracija)
+        {
+            IzvjestajVozila rezultat = new IzvjestajVozila();
+
+            string sql = $@"SELECT v.Registracija,
+                    (SELECT COALESCE(SUM(TrošakServisa), 0) FROM Vozilo WHERE Registracija = '{registracija}') as UkupniServis
+                    FROM Vozilo v 
+                    WHERE v.Registracija = '{registracija}'";
+
+            DB.OpenConnection();
+            var reader = DB.GetDataReader(sql);
+
+            if (reader.Read())
+            {
+                rezultat.Registracija = reader["Registracija"].ToString();
+                rezultat.UkupniTrosak = Convert.ToDecimal(reader["UkupniServis"]);
+            }
+
+            reader.Close();
+            DB.CloseConnection();
+
+            return rezultat;
+        }
+
     }
 }

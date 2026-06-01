@@ -110,6 +110,7 @@
             this.lblIzvještaj.Size = new System.Drawing.Size(55, 16);
             this.lblIzvještaj.TabIndex = 7;
             this.lblIzvještaj.Text = "Izvještaj";
+            this.lblIzvještaj.Click += new System.EventHandler(this.lblIzvještaj_Click);
             // 
             // dgvRezervacije
             // 

@@ -125,7 +125,7 @@ namespace CarCar
             {
 
                 int idZaBrisanje = Convert.ToInt32(dgvRezervacije.SelectedRows[0].Cells["Id"].Value);
-
+                int idVozila = Convert.ToInt32(dgvRezervacije.SelectedRows[0].Cells["IdVozila"].Value);
                 var rezultat = MessageBox.Show($"Jeste li sigurni da želite obrisati stavku ID: {idZaBrisanje}?",
                                                "Potvrda", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -133,7 +133,6 @@ namespace CarCar
                 {
 
                     TerminRepository.DeleteTermin(idZaBrisanje);
-
 
                     if (trenutniPrikaz == "Servisi")
                     {
@@ -259,6 +258,14 @@ namespace CarCar
             }
 
             dgvRezervacije.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void lblIzvještaj_Click(object sender, EventArgs e)
+        {
+            FrmIzvještaj frmIzvještaj = new FrmIzvještaj();
+            Hide();
+            frmIzvještaj.ShowDialog();
+            Close();
         }
     }
 }
