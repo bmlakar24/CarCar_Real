@@ -11,22 +11,6 @@ namespace CarCar.Repositories
 {
     internal class ServisiRepository
     {
-        public static Termin GetTermin(int id)
-        {
-            Termin termin = null;
-            string sql = $"SELECT * FROM Termin WHERE Id = {id}";
-            DB.OpenConnection();
-            var reader = DB.GetDataReader(sql);
-
-            if (reader.HasRows)
-            {
-                reader.Read();
-                termin = CreateObject(reader);
-                reader.Close();
-            }
-            DB.CloseConnection();
-            return termin;
-        }
         public static List<Termin> GetServisi()
         {
             var servisi = new List<Termin>();
