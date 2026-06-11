@@ -2,15 +2,8 @@
 {
     partial class FrmPrikazIzvještaja
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,76 +15,80 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.lblVozilo = new System.Windows.Forms.Label();
-            this.lblZarada = new System.Windows.Forms.Label();
-            this.lblTrosak = new System.Windows.Forms.Label();
-            this.lblDobit = new System.Windows.Forms.Label();
+            this.lblCarCar = new System.Windows.Forms.Label();
+            this.lblNaslov = new System.Windows.Forms.Label();
+            this.dgvIzvjestaj = new System.Windows.Forms.DataGridView();
+            this.btnZatvori = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIzvjestaj)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblVozilo
-            // 
-            this.lblVozilo.AutoSize = true;
-            this.lblVozilo.Location = new System.Drawing.Point(35, 24);
-            this.lblVozilo.Name = "lblVozilo";
-            this.lblVozilo.Size = new System.Drawing.Size(44, 16);
-            this.lblVozilo.TabIndex = 0;
-            this.lblVozilo.Text = "label1";
-            // 
-            // lblZarada
-            // 
-            this.lblZarada.AutoSize = true;
-            this.lblZarada.Location = new System.Drawing.Point(35, 59);
-            this.lblZarada.Name = "lblZarada";
-            this.lblZarada.Size = new System.Drawing.Size(44, 16);
-            this.lblZarada.TabIndex = 1;
-            this.lblZarada.Text = "label2";
-            // 
-            // lblTrosak
-            // 
-            this.lblTrosak.AutoSize = true;
-            this.lblTrosak.Location = new System.Drawing.Point(35, 89);
-            this.lblTrosak.Name = "lblTrosak";
-            this.lblTrosak.Size = new System.Drawing.Size(44, 16);
-            this.lblTrosak.TabIndex = 2;
-            this.lblTrosak.Text = "label3";
-            // 
-            // lblDobit
-            // 
-            this.lblDobit.AutoSize = true;
-            this.lblDobit.Location = new System.Drawing.Point(38, 123);
-            this.lblDobit.Name = "lblDobit";
-            this.lblDobit.Size = new System.Drawing.Size(44, 16);
-            this.lblDobit.TabIndex = 3;
-            this.lblDobit.Text = "label4";
-            // 
+            //
+            // lblCarCar
+            //
+            this.lblCarCar.AutoSize = true;
+            this.lblCarCar.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.lblCarCar.Location = new System.Drawing.Point(12, 12);
+            this.lblCarCar.Name = "lblCarCar";
+            this.lblCarCar.Size = new System.Drawing.Size(60, 20);
+            this.lblCarCar.TabIndex = 0;
+            this.lblCarCar.Text = "CarCar";
+            //
+            // lblNaslov
+            //
+            this.lblNaslov.AutoSize = true;
+            this.lblNaslov.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
+            this.lblNaslov.Location = new System.Drawing.Point(12, 50);
+            this.lblNaslov.Name = "lblNaslov";
+            this.lblNaslov.Size = new System.Drawing.Size(220, 25);
+            this.lblNaslov.TabIndex = 1;
+            this.lblNaslov.Text = "Financijski izvještaj";
+            //
+            // dgvIzvjestaj
+            //
+            this.dgvIzvjestaj.AllowUserToAddRows = false;
+            this.dgvIzvjestaj.AllowUserToDeleteRows = false;
+            this.dgvIzvjestaj.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvIzvjestaj.Location = new System.Drawing.Point(12, 95);
+            this.dgvIzvjestaj.Name = "dgvIzvjestaj";
+            this.dgvIzvjestaj.ReadOnly = true;
+            this.dgvIzvjestaj.RowHeadersVisible = false;
+            this.dgvIzvjestaj.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvIzvjestaj.Size = new System.Drawing.Size(560, 300);
+            this.dgvIzvjestaj.TabIndex = 2;
+            //
+            // btnZatvori
+            //
+            this.btnZatvori.Location = new System.Drawing.Point(472, 410);
+            this.btnZatvori.Name = "btnZatvori";
+            this.btnZatvori.Size = new System.Drawing.Size(100, 32);
+            this.btnZatvori.TabIndex = 3;
+            this.btnZatvori.Text = "Zatvori";
+            this.btnZatvori.UseVisualStyleBackColor = true;
+            this.btnZatvori.Click += new System.EventHandler(this.btnZatvori_Click);
+            //
             // FrmPrikazIzvještaja
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 246);
-            this.Controls.Add(this.lblDobit);
-            this.Controls.Add(this.lblTrosak);
-            this.Controls.Add(this.lblZarada);
-            this.Controls.Add(this.lblVozilo);
+            this.ClientSize = new System.Drawing.Size(584, 461);
+            this.Controls.Add(this.btnZatvori);
+            this.Controls.Add(this.dgvIzvjestaj);
+            this.Controls.Add(this.lblNaslov);
+            this.Controls.Add(this.lblCarCar);
             this.Name = "FrmPrikazIzvještaja";
-            this.Text = "PrikazIzvještaja";
-            this.Load += new System.EventHandler(this.FrmPrikazIzvještaja_Load);
+            this.Text = "CarCar - Financijski izvještaj";
+            this.Load += new System.EventHandler(this.FrmPrikazIzvjestaja_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIzvjestaj)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
 
-        private System.Windows.Forms.Label lblVozilo;
-        private System.Windows.Forms.Label lblZarada;
-        private System.Windows.Forms.Label lblTrosak;
-        private System.Windows.Forms.Label lblDobit;
+        private System.Windows.Forms.Label lblCarCar;
+        private System.Windows.Forms.Label lblNaslov;
+        private System.Windows.Forms.DataGridView dgvIzvjestaj;
+        private System.Windows.Forms.Button btnZatvori;
     }
 }

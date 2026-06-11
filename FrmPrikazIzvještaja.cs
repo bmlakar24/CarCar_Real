@@ -14,29 +14,59 @@ namespace CarCar
 {
     public partial class FrmPrikazIzvještaja : Form
     {
-        private string Registracija;
-        private DateTime VrijemeOd;
-        private DateTime VrijemeDo;
-        public FrmPrikazIzvještaja(string Reg, DateTime vrijemeOd, DateTime vrijemeDo)
+        private int godina;
+        private string registracija;
+
+        public FrmPrikazIzvještaja()
         {
             InitializeComponent();
-            Registracija = Reg;
-            VrijemeOd = vrijemeOd;
-            VrijemeDo = vrijemeDo;
         }
 
-        private void FrmPrikazIzvještaja_Load(object sender, EventArgs e)
+        public FrmPrikazIzvještaja(int godina, string registracija)
         {
-            var podaci = RezervacijaRepository.GetFinancijskiIzvjestaj(Registracija);
-
-
-        
-            lblVozilo.Text = "Izvještaj za vozilo: " + podaci.Registracija;
-            lblZarada.Text = "Ukupna Zarada: " + podaci.UkupnaZarada.ToString("C2");
-            lblTrosak.Text = "Trošak: " + podaci.UkupniTrosak.ToString("C2");
-            lblDobit.Text = "Dobit: " + podaci.NetoDobit.ToString("C2");
+            InitializeComponent();
+            this.godina = godina;
+            this.registracija = registracija;
         }
 
-        
+        private void FrmPrikazIzvjestaja_Load(object sender, EventArgs e)
+        {
+            lblNaslov.Text = "Financijski izvještaj za " + godina;
+            if (!string.IsNullOrEmpty(registracija))
+            {
+                lblNaslov.Text = lblNaslov.Text + " - " + registracija;
+            }
+
+            List<IzvjestajVozila> podaci = RezervacijaRepository.GetGodisnjiIzvjestaj(godina, registracija);
+
+            var zaPrikaz = podaci.Select(p => new
+            {
+                Vozilo = p.Registracija,
+                UkupanNajam = p.UkupnaZarada,
+                UkupniTroskovi = p.UkupniTrosak,
+                Dobit = p.NetoDobit
+            }).ToList();
+
+            dgvIzvjestaj.DataSource = zaPrikaz;
+
+            if (dgvIzvjestaj.Columns.Count > 0)
+            {
+                dgvIzvjestaj.Columns["Vozilo"].HeaderText = "Vozilo (reg)";
+                dgvIzvjestaj.Columns["UkupanNajam"].HeaderText = "Ukupan najam";
+                dgvIzvjestaj.Columns["UkupniTroskovi"].HeaderText = "Ukupni troškovi";
+                dgvIzvjestaj.Columns["Dobit"].HeaderText = "Dobit";
+
+                dgvIzvjestaj.Columns["UkupanNajam"].DefaultCellStyle.Format = "C2";
+                dgvIzvjestaj.Columns["UkupniTroskovi"].DefaultCellStyle.Format = "C2";
+                dgvIzvjestaj.Columns["Dobit"].DefaultCellStyle.Format = "C2";
+
+                dgvIzvjestaj.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+        }
+
+        private void btnZatvori_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
