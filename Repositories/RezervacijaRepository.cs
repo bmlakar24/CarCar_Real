@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -14,32 +14,41 @@ namespace CarCar.Repositories
         public static Termin GetTermin(int id)
         {
             Termin termin = null;
-            string sql = $"SELECT * FROM Rezervacija WHERE IdRez = {id}";
+            string sql = $@"
+        SELECT r.*, v.*,
+               k.Ime AS ImeKlijenta, k.Prezime AS PrezimeKlijenta,
+               z.Ime AS ImeZaposlenika, z.Prezime AS PrezimeZaposlenika
+        FROM Rezervacija r
+        JOIN Vozilo v ON r.Vozilo = v.IdVozila
+        JOIN Klijent k ON k.OIB = r.OIB_Klijenta
+        JOIN Zaposlenik z ON r.Zaposlenik = z.IdZaposlenik
+        WHERE r.IdRez = {id}";
             DB.OpenConnection();
             var reader = DB.GetDataReader(sql);
 
             if (reader.HasRows)
             {
                 reader.Read();
-                termin = CreateObject(reader);
+                termin = CreateObjectSaDetaljima(reader);
                 reader.Close();
             }
             DB.CloseConnection();
             return termin;
         }
+
         public static List<Termin> GetRezervacije()
         {
             var rezervacije = new List<Termin>();
 
             string sql = @"
-        SELECT r.*, v.*, 
-               k.Ime AS ImeKlijenta, k.Prezime AS PrezimeKlijenta, 
-               z.Ime AS ImeZaposlenika, z.Prezime AS PrezimeZaposlenika 
-        FROM Rezervacija r 
-        JOIN Vozilo v ON r.Vozilo = v.IdVozila 
-        JOIN Klijent k ON k.OIB = r.OIB_Klijenta 
-        JOIN Zaposlenik z ON r.Zaposlenik = z.IdZaposlenik 
-        WHERE r.TipNajma = 'Najam'";
+                SELECT r.*, v.*, 
+                       k.Ime AS ImeKlijenta, k.Prezime AS PrezimeKlijenta, 
+                       z.Ime AS ImeZaposlenika, z.Prezime AS PrezimeZaposlenika 
+                FROM Rezervacija r 
+                JOIN Vozilo v ON r.Vozilo = v.IdVozila 
+                JOIN Klijent k ON k.OIB = r.OIB_Klijenta 
+                JOIN Zaposlenik z ON r.Zaposlenik = z.IdZaposlenik 
+                WHERE r.TipNajma = 'Najam'";
 
             DB.OpenConnection();
             var reader = DB.GetDataReader(sql);
@@ -56,11 +65,10 @@ namespace CarCar.Repositories
             return rezervacije;
         }
 
-        public static Termin CreateObject(SqlDataReader reader)
+        private static Termin CreateObject(SqlDataReader reader)
         {
             var termin = new Termin
             {
-
                 Id = int.Parse(reader["IdRez"].ToString()),
                 Tip = reader["TipNajma"].ToString(),
                 Status = reader["Status"].ToString(),
@@ -77,7 +85,7 @@ namespace CarCar.Repositories
 
             termin.Vozilo = new Vozilo
             {
-                Id = int.Parse(reader["Vozilo"].ToString()), 
+                Id = int.Parse(reader["Vozilo"].ToString()),
                 Model = reader["Model"].ToString(),
                 Registracija = reader["Registracija"].ToString(),
                 CijenaDan = Convert.ToDecimal(reader["CijenaDan"]),
@@ -88,7 +96,7 @@ namespace CarCar.Repositories
             {
                 termin.Klijent = new Klijent
                 {
-                    OIB = reader["OIB_Klijenta"].ToString(), 
+                    OIB = reader["OIB_Klijenta"].ToString(),
                     Ime = reader["ImeKlijenta"].ToString(),
                     Prezime = reader["PrezimeKlijenta"].ToString()
                 };
@@ -103,29 +111,67 @@ namespace CarCar.Repositories
 
             return termin;
         }
-        public static IzvjestajVozila GetFinancijskiIzvjestaj(string registracija)
-        {
-            IzvjestajVozila rezultat = new IzvjestajVozila();
 
-            string sql = $@"SELECT v.Registracija,
-                    (SELECT COALESCE(SUM(TrošakServisa), 0) FROM Vozilo WHERE Registracija = '{registracija}') as UkupniServis
-                    FROM Vozilo v 
-                    WHERE v.Registracija = '{registracija}'";
+        public static List<IzvjestajVozila> GetGodisnjiIzvjestaj(int godina, string registracija = null)
+        {
+            string filterVozila = string.IsNullOrEmpty(registracija)
+                ? ""
+                : $" AND v.Registracija = '{registracija}'";
+
+            string sql = $@"
+        SELECT v.Registracija, v.CijenaDan, v.CijenaSat, v.TrošakServisa,
+               r.TipNajma, r.VrijemeOd, r.VrijemeDO
+        FROM Vozilo v
+        LEFT JOIN Rezervacija r
+            ON r.Vozilo = v.IdVozila AND YEAR(r.VrijemeOd) = {godina}
+        WHERE 1 = 1{filterVozila}
+        ORDER BY v.Registracija";
+
+            var mapa = new Dictionary<string, IzvjestajVozila>();
 
             DB.OpenConnection();
             var reader = DB.GetDataReader(sql);
 
-            if (reader.Read())
+            while (reader.Read())
             {
-                rezultat.Registracija = reader["Registracija"].ToString();
-                rezultat.UkupniTrosak = Convert.ToDecimal(reader["UkupniServis"]);
+                string reg = reader["Registracija"].ToString();
+                if (!mapa.TryGetValue(reg, out IzvjestajVozila iz))
+                {
+                    iz = new IzvjestajVozila { Registracija = reg };
+                    mapa[reg] = iz;
+                }
+
+                if (reader["TipNajma"] == DBNull.Value)
+                {
+                    continue;
+                }
+
+                string tip = reader["TipNajma"].ToString();
+                if (tip == "Servis")
+                {
+                    iz.UkupniTrosak += Convert.ToDecimal(reader["TrošakServisa"]);
+                }
+                else
+                {
+                    Termin stavka = new Termin
+                    {
+                        Tip = "Najam",
+                        VrijemeOd = Convert.ToDateTime(reader["VrijemeOd"]),
+                        VrijemeDo = Convert.ToDateTime(reader["VrijemeDO"]),
+                        Vozilo = new Vozilo
+                        {
+                            CijenaDan = Convert.ToDecimal(reader["CijenaDan"]),
+                            CijenaSat = Convert.ToDecimal(reader["CijenaSat"])
+                        }
+                    };
+                    iz.UkupnaZarada += stavka.CijenaNajma ?? 0;
+                }
             }
 
             reader.Close();
             DB.CloseConnection();
 
-            return rezultat;
+            return mapa.Values.ToList();
         }
-
     }
 }
