@@ -1,16 +1,9 @@
-﻿namespace CarCar
+namespace CarCar
 {
     partial class FrmIzvještaj
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,107 +15,115 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.lblRegIzvještaj = new System.Windows.Forms.Label();
-            this.lblOdIzvještaj = new System.Windows.Forms.Label();
-            this.lblDoIzvještaj = new System.Windows.Forms.Label();
-            this.dtpVrijemeOd = new System.Windows.Forms.DateTimePicker();
-            this.dtpVrijemeDo = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
-            this.cmbReg = new System.Windows.Forms.ComboBox();
+            this.lblNaslov = new System.Windows.Forms.Label();
+            this.lblVozilo = new System.Windows.Forms.Label();
+            this.cmbVozilo = new System.Windows.Forms.ComboBox();
+            this.lblGodina = new System.Windows.Forms.Label();
+            this.nudGodina = new System.Windows.Forms.NumericUpDown();
+            this.btnGeneriraj = new System.Windows.Forms.Button();
+            this.btnOdbaci = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGodina)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblRegIzvještaj
-            // 
-            this.lblRegIzvještaj.AutoSize = true;
-            this.lblRegIzvještaj.Location = new System.Drawing.Point(107, 38);
-            this.lblRegIzvještaj.Name = "lblRegIzvještaj";
-            this.lblRegIzvještaj.Size = new System.Drawing.Size(79, 16);
-            this.lblRegIzvještaj.TabIndex = 1;
-            this.lblRegIzvještaj.Text = "Registracija";
-            // 
-            // lblOdIzvještaj
-            // 
-            this.lblOdIzvještaj.AutoSize = true;
-            this.lblOdIzvještaj.Location = new System.Drawing.Point(112, 81);
-            this.lblOdIzvještaj.Name = "lblOdIzvještaj";
-            this.lblOdIzvještaj.Size = new System.Drawing.Size(74, 16);
-            this.lblOdIzvještaj.TabIndex = 2;
-            this.lblOdIzvještaj.Text = "Vrijeme Od";
-            // 
-            // lblDoIzvještaj
-            // 
-            this.lblDoIzvještaj.AutoSize = true;
-            this.lblDoIzvještaj.Location = new System.Drawing.Point(112, 114);
-            this.lblDoIzvještaj.Name = "lblDoIzvještaj";
-            this.lblDoIzvještaj.Size = new System.Drawing.Size(74, 16);
-            this.lblDoIzvještaj.TabIndex = 3;
-            this.lblDoIzvještaj.Text = "Vrijeme Do";
-            // 
-            // dtpVrijemeOd
-            // 
-            this.dtpVrijemeOd.Location = new System.Drawing.Point(233, 75);
-            this.dtpVrijemeOd.Name = "dtpVrijemeOd";
-            this.dtpVrijemeOd.Size = new System.Drawing.Size(257, 22);
-            this.dtpVrijemeOd.TabIndex = 5;
-            // 
-            // dtpVrijemeDo
-            // 
-            this.dtpVrijemeDo.Location = new System.Drawing.Point(241, 114);
-            this.dtpVrijemeDo.Name = "dtpVrijemeDo";
-            this.dtpVrijemeDo.Size = new System.Drawing.Size(249, 22);
-            this.dtpVrijemeDo.TabIndex = 6;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(201, 151);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Spremi";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // cmbReg
-            // 
-            this.cmbReg.FormattingEnabled = true;
-            this.cmbReg.Location = new System.Drawing.Point(233, 38);
-            this.cmbReg.Name = "cmbReg";
-            this.cmbReg.Size = new System.Drawing.Size(208, 24);
-            this.cmbReg.TabIndex = 8;
-            // 
+            //
+            // lblNaslov
+            //
+            this.lblNaslov.AutoSize = true;
+            this.lblNaslov.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblNaslov.Location = new System.Drawing.Point(60, 20);
+            this.lblNaslov.Name = "lblNaslov";
+            this.lblNaslov.Size = new System.Drawing.Size(247, 21);
+            this.lblNaslov.TabIndex = 0;
+            this.lblNaslov.Text = "Unos podataka za izvještaj";
+            //
+            // lblVozilo
+            //
+            this.lblVozilo.AutoSize = true;
+            this.lblVozilo.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.lblVozilo.Location = new System.Drawing.Point(64, 75);
+            this.lblVozilo.Name = "lblVozilo";
+            this.lblVozilo.Size = new System.Drawing.Size(52, 20);
+            this.lblVozilo.TabIndex = 1;
+            this.lblVozilo.Text = "Vozilo";
+            //
+            // cmbVozilo
+            //
+            this.cmbVozilo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbVozilo.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.cmbVozilo.Location = new System.Drawing.Point(170, 72);
+            this.cmbVozilo.Name = "cmbVozilo";
+            this.cmbVozilo.Size = new System.Drawing.Size(160, 28);
+            this.cmbVozilo.TabIndex = 2;
+            //
+            // lblGodina
+            //
+            this.lblGodina.AutoSize = true;
+            this.lblGodina.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.lblGodina.Location = new System.Drawing.Point(64, 120);
+            this.lblGodina.Name = "lblGodina";
+            this.lblGodina.Size = new System.Drawing.Size(57, 20);
+            this.lblGodina.TabIndex = 3;
+            this.lblGodina.Text = "Godina";
+            //
+            // nudGodina
+            //
+            this.nudGodina.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.nudGodina.Location = new System.Drawing.Point(170, 118);
+            this.nudGodina.Maximum = new decimal(new int[] { 2100, 0, 0, 0 });
+            this.nudGodina.Minimum = new decimal(new int[] { 1990, 0, 0, 0 });
+            this.nudGodina.Name = "nudGodina";
+            this.nudGodina.Size = new System.Drawing.Size(120, 27);
+            this.nudGodina.TabIndex = 4;
+            this.nudGodina.Value = new decimal(new int[] { 2026, 0, 0, 0 });
+            //
+            // btnGeneriraj
+            //
+            this.btnGeneriraj.Location = new System.Drawing.Point(64, 175);
+            this.btnGeneriraj.Name = "btnGeneriraj";
+            this.btnGeneriraj.Size = new System.Drawing.Size(100, 35);
+            this.btnGeneriraj.TabIndex = 5;
+            this.btnGeneriraj.Text = "Generiraj";
+            this.btnGeneriraj.UseVisualStyleBackColor = true;
+            this.btnGeneriraj.Click += new System.EventHandler(this.btnGeneriraj_Click);
+            //
+            // btnOdbaci
+            //
+            this.btnOdbaci.Location = new System.Drawing.Point(190, 175);
+            this.btnOdbaci.Name = "btnOdbaci";
+            this.btnOdbaci.Size = new System.Drawing.Size(100, 35);
+            this.btnOdbaci.TabIndex = 6;
+            this.btnOdbaci.Text = "Odbaci";
+            this.btnOdbaci.UseVisualStyleBackColor = true;
+            this.btnOdbaci.Click += new System.EventHandler(this.btnOdbaci_Click);
+            //
             // FrmIzvještaj
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 203);
-            this.Controls.Add(this.cmbReg);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dtpVrijemeDo);
-            this.Controls.Add(this.dtpVrijemeOd);
-            this.Controls.Add(this.lblDoIzvještaj);
-            this.Controls.Add(this.lblOdIzvještaj);
-            this.Controls.Add(this.lblRegIzvještaj);
+            this.ClientSize = new System.Drawing.Size(380, 240);
+            this.Controls.Add(this.btnOdbaci);
+            this.Controls.Add(this.btnGeneriraj);
+            this.Controls.Add(this.nudGodina);
+            this.Controls.Add(this.lblGodina);
+            this.Controls.Add(this.cmbVozilo);
+            this.Controls.Add(this.lblVozilo);
+            this.Controls.Add(this.lblNaslov);
             this.Name = "FrmIzvještaj";
-            this.Text = "FrmIzvještaj";
-            this.Load += new System.EventHandler(this.FrmIzvještaj_Load);
+            this.Text = "CarCar - Unos podataka za izvještaj";
+            this.Load += new System.EventHandler(this.FrmIzvjestaj_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.nudGodina)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
-        private System.Windows.Forms.Label lblRegIzvještaj;
-        private System.Windows.Forms.Label lblOdIzvještaj;
-        private System.Windows.Forms.Label lblDoIzvještaj;
-        private System.Windows.Forms.DateTimePicker dtpVrijemeOd;
-        private System.Windows.Forms.DateTimePicker dtpVrijemeDo;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox cmbReg;
+        private System.Windows.Forms.Label lblNaslov;
+        private System.Windows.Forms.Label lblVozilo;
+        private System.Windows.Forms.ComboBox cmbVozilo;
+        private System.Windows.Forms.Label lblGodina;
+        private System.Windows.Forms.NumericUpDown nudGodina;
+        private System.Windows.Forms.Button btnGeneriraj;
+        private System.Windows.Forms.Button btnOdbaci;
     }
 }

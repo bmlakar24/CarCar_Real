@@ -7,43 +7,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CarCar.Models;
 using CarCar.Repositories;
 
 namespace CarCar
 {
     public partial class FrmIzvještaj : Form
     {
-
         public FrmIzvještaj()
         {
             InitializeComponent();
-            
-        }
-        public void FrmIzvještaj_Load(object sender, EventArgs e)
-        {
-            cmbReg.Items.Add("ZG-12345-AA");
-            cmbReg.Items.Add("ZG-54321-BB");
-
-            DateTime VrijemeOd = dtpVrijemeOd.Value;
-            DateTime VrijemeDo = dtpVrijemeDo.Value;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void FrmIzvjestaj_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbReg.Text))
+            nudGodina.Value = DateTime.Now.Year;
+
+            cmbVozilo.Items.Add("Sva vozila");
+            foreach (Vozilo v in VoziloRepository.GetVozila())
             {
-                MessageBox.Show("Molim odaberi vozilo!");
-                return;
+                cmbVozilo.Items.Add(v.Registracija);
             }
-                string Reg = cmbReg.Text;
+            cmbVozilo.SelectedIndex = 0;
+        }
 
-                DateTime VrijemeOd = dtpVrijemeOd.Value;
-                DateTime VrijemeDo  = dtpVrijemeDo.Value;
+        private void btnGeneriraj_Click(object sender, EventArgs e)
+        {
+            int godina = (int)nudGodina.Value;
 
-                FrmPrikazIzvještaja forma = new FrmPrikazIzvještaja(Reg, VrijemeOd, VrijemeDo);
-                Hide();
-                forma.ShowDialog();
-                Close();
+            string registracija = null;
+            if (cmbVozilo.SelectedIndex > 0)
+            {
+                registracija = cmbVozilo.SelectedItem.ToString();
+            }
+
+            FrmPrikazIzvještaja forma = new FrmPrikazIzvještaja(godina, registracija);
+            forma.ShowDialog();
+            Close();
+        }
+
+        private void btnOdbaci_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
