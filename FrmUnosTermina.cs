@@ -49,9 +49,30 @@ namespace CarCar
                 dtpDo.Value = odabraniTermin.VrijemeDo;
                 cmbTip.SelectedItem = odabraniTermin.Tip;
                 cmbStatus.SelectedItem = odabraniTermin.Status;
-                cmbVozilo.SelectedItem = odabraniTermin.Vozilo;
-                cmbKlijent.SelectedItem = odabraniTermin.Klijent;
-                cmbZaposlenik.SelectedItem = odabraniTermin.Zaposlenik;
+
+                cmbTip.Enabled = false;
+
+                if (odabraniTermin.Vozilo != null)
+                {
+                    foreach (Vozilo v in cmbVozilo.Items)
+                    {
+                        if (v.Id == odabraniTermin.Vozilo.Id) { cmbVozilo.SelectedItem = v; break; }
+                    }
+                }
+                if (odabraniTermin.Klijent != null)
+                {
+                    foreach (Klijent k in cmbKlijent.Items)
+                    {
+                        if (k.OIB == odabraniTermin.Klijent.OIB) { cmbKlijent.SelectedItem = k; break; }
+                    }
+                }
+                if (odabraniTermin.Zaposlenik != null)
+                {
+                    foreach (Zaposlenik z in cmbZaposlenik.Items)
+                    {
+                        if (z.Id == odabraniTermin.Zaposlenik.Id) { cmbZaposlenik.SelectedItem = z; break; }
+                    }
+                }
             }
             else
             {
