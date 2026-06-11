@@ -10,8 +10,6 @@ namespace CarCar.Repositories
 {
     public class TerminRepository
     {
-        private const string V = "TrošakServisa";
-
         public static void AddTermin(Termin t)
         {
             string sql = $@"INSERT INTO Rezervacija (VrijemeOd, VrijemeDO, Status, OIB_Klijenta, Zaposlenik, Vozilo, TipNajma) 
@@ -27,6 +25,7 @@ namespace CarCar.Repositories
             DB.ExecuteCommand(sql);
             DB.CloseConnection();
         }
+
         public static void DeleteTermin(int id)
         {
             string sql = $"DELETE FROM Rezervacija WHERE IdRez = {id}";
@@ -35,6 +34,7 @@ namespace CarCar.Repositories
             DB.ExecuteCommand(sql);
             DB.CloseConnection();
         }
+
         public static void Update(Termin t)
         {
             string sql = $@"UPDATE Rezervacija 
@@ -50,113 +50,5 @@ namespace CarCar.Repositories
             DB.ExecuteCommand(sql);
             DB.CloseConnection();
         }
-        public static List<Termin> PretraziTermine(string tekst)
-        {
-            List<Termin> lista = new List<Termin>();
-            string sql = $@"SELECT
-                           r.IdRez,
-                           r.VrijemeOd,
-                           r.VrijemeDO,
-                           r.Status,
-                           r.TipNajma,
-                           r.OIB_Klijenta,
-                           v.Registracija,
-                           z.Ime AS ImeZaposlenika, 
-                           z.Prezime AS PrezimeZaposlenika 
-                    FROM Rezervacija r
-                    LEFT JOIN Vozilo v ON r.Vozilo = v.IdVozila
-                    LEFT JOIN Zaposlenik z ON r.Zaposlenik = z.IdZaposlenik
-                    WHERE r.TipNajma = 'Najam' 
-                    AND (r.Status LIKE '%{tekst}%' 
-                         OR v.Registracija LIKE '%{tekst}%' 
-                         OR z.Ime LIKE '%{tekst}%' 
-                         OR z.Prezime LIKE '%{tekst}%' 
-                         OR r.OIB_Klijenta LIKE '%{tekst}%')";
-
-
-            DB.OpenConnection();
-            var reader = DB.GetDataReader(sql);
-
-            while (reader.Read())
-            {
-                Termin t = RezervacijaRepository.CreateObject(reader);
-                if (reader["Registracija"] != DBNull.Value)
-                {
-                    t.Vozilo = new Vozilo();
-                    t.Vozilo.Registracija = reader["Registracija"].ToString();
-                }
-                if (reader["ImeZaposlenika"] != DBNull.Value && reader["PrezimeZaposlenika"] != DBNull.Value)
-                {
-                    t.Zaposlenik = new Zaposlenik();
-                    t.Zaposlenik.Ime = reader["ImeZaposlenika"].ToString();
-                    t.Zaposlenik.Prezime = reader["PrezimeZaposlenika"].ToString();
-                }
-                if (reader["OIB_Klijenta"] != DBNull.Value)
-                {
-                    t.Klijent = new Klijent();
-                    t.Klijent.OIB = reader["OIB_Klijenta"].ToString();  
-                }
-                    lista.Add(t);
-            }
-            reader.Close();
-            DB.CloseConnection();
-            return lista;
-        }
-        public static List<Termin> PretraziServise(string tekst)
-        {
-            List<Termin> lista = new List<Termin>();
-            string sql = $@"SELECT
-                           r.IdRez,
-                           r.VrijemeOd,
-                           r.VrijemeDO,
-                           r.Status,
-                           r.TipNajma,
-                           r.OIB_Klijenta,
-                           v.TrošakServisa,
-                           v.Registracija,
-                           z.Ime AS ImeZaposlenika, 
-                           z.Prezime AS PrezimeZaposlenika 
-                    FROM Rezervacija r
-                    LEFT JOIN Vozilo v ON r.Vozilo = v.IdVozila
-                    LEFT JOIN Zaposlenik z ON r.Zaposlenik = z.IdZaposlenik
-                    WHERE r.TipNajma = 'Servis' 
-                    AND (r.Status LIKE '%{tekst}%' 
-                         OR v.Registracija LIKE '%{tekst}%' 
-                         OR z.Ime LIKE '%{tekst}%' 
-                         OR z.Prezime LIKE '%{tekst}%' 
-                         OR r.OIB_Klijenta LIKE '%{tekst}%')";
-
-
-            DB.OpenConnection();
-            var reader = DB.GetDataReader(sql);
-
-            while (reader.Read())
-            {
-                Termin t = RezervacijaRepository.CreateObject(reader);
-                if (reader["Registracija"] != DBNull.Value)
-                {
-                    t.Vozilo = new Vozilo();
-                    t.Vozilo.Registracija = reader["Registracija"].ToString();
-                    t.Vozilo.TrošakServisa = Convert.ToDecimal(reader["TrošakServisa"]);
-                }
-                if (reader["ImeZaposlenika"] != DBNull.Value && reader["PrezimeZaposlenika"] != DBNull.Value)
-                {
-                    t.Zaposlenik = new Zaposlenik();
-                    t.Zaposlenik.Ime = reader["ImeZaposlenika"].ToString();
-                    t.Zaposlenik.Prezime = reader["PrezimeZaposlenika"].ToString();
-                }
-                if (reader["OIB_Klijenta"] != DBNull.Value)
-                {
-                    t.Klijent = new Klijent();
-                    t.Klijent.OIB = reader["OIB_Klijenta"].ToString();
-                }
-                lista.Add(t);
-            }
-            reader.Close();
-            DB.CloseConnection();
-            return lista;
-        }
-
-
-        }
+    }
 }
