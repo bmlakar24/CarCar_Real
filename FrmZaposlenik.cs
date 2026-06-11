@@ -15,6 +15,7 @@ namespace CarCar
     public partial class FrmZaposlenik : Form
     {
         private string trenutniPrikaz = "Rezervacije";
+
         public FrmZaposlenik()
         {
             InitializeComponent();
@@ -33,17 +34,20 @@ namespace CarCar
             trenutniPrikaz = "Rezervacije";
             UcitajRezervacije();
         }
+
         private void UcitajRezervacije()
         {
-            var rezervacije = RezervacijaRepository.GetRezervacije();
+            PrikaziRezervacije(RezervacijaRepository.GetRezervacije());
+        }
 
+        private void PrikaziRezervacije(List<Termin> rezervacije)
+        {
             var zaPrikaz = rezervacije.Select(r => new
             {
                 Id = r.Id,
                 VrijemeOd = r.VrijemeOd,
                 VrijemeDo = r.VrijemeDo,
                 Status = r.Status,
-
                 Vozilo = r.Vozilo != null ? r.Vozilo.Registracija : "-",
                 Zaposlenik = r.Zaposlenik != null ? r.Zaposlenik.Ime + " " + r.Zaposlenik.Prezime : "-",
                 OIBKlijenta = r.OIBKlijenta,
@@ -58,18 +62,23 @@ namespace CarCar
                 dgvRezervacijeZap.Columns["VrijemeDo"].HeaderText = "Do";
                 dgvRezervacijeZap.Columns["OIBKlijenta"].HeaderText = "OIB Klijenta";
                 dgvRezervacijeZap.Columns["CijenaNajma"].HeaderText = "Cijena Najma";
-
                 dgvRezervacijeZap.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
         }
+
         private void lblServisi_Click(object sender, EventArgs e)
         {
-            trenutniPrikaz= "Servisi";
+            trenutniPrikaz = "Servisi";
             UcitajServise();
         }
+
         private void UcitajServise()
         {
-            var servisi = ServisiRepository.GetServisi();
+            PrikaziServise(ServisiRepository.GetServisi());
+        }
+
+        private void PrikaziServise(List<Termin> servisi)
+        {
             var zaPrikaz = servisi.Select(r => new
             {
                 Id = r.Id,
@@ -79,15 +88,17 @@ namespace CarCar
                 Vozilo = r.Vozilo != null ? r.Vozilo.Registracija : "-",
                 Zaposlenik = r.Zaposlenik != null ? r.Zaposlenik.Ime + " " + r.Zaposlenik.Prezime : "-",
                 OIBKlijenta = r.OIBKlijenta,
-                TrošakServisa = r.Vozilo.TrošakServisa,
+                TrosakServisa = r.Vozilo != null ? r.Vozilo.TrošakServisa : 0
             }).ToList();
+
             dgvRezervacijeZap.DataSource = zaPrikaz;
+
             if (dgvRezervacijeZap.Columns.Count > 0)
             {
                 dgvRezervacijeZap.Columns["VrijemeOd"].HeaderText = "Od";
                 dgvRezervacijeZap.Columns["VrijemeDo"].HeaderText = "Do";
                 dgvRezervacijeZap.Columns["OIBKlijenta"].HeaderText = "OIB Klijenta";
-                dgvRezervacijeZap.Columns["TrošakServisa"].HeaderText = "Trošak Servisa";
+                dgvRezervacijeZap.Columns["TrosakServisa"].HeaderText = "Trošak Servisa";
                 dgvRezervacijeZap.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
         }
@@ -98,31 +109,29 @@ namespace CarCar
             UcitajRezervacije();
         }
 
+        private void OsvjeziPrikaz()
+        {
+            if (trenutniPrikaz == "Servisi")
+            {
+                UcitajServise();
+            }
+            else
+            {
+                UcitajRezervacije();
+            }
+        }
+
         private void btnObrisiZap_Click(object sender, EventArgs e)
         {
             if (dgvRezervacijeZap.SelectedRows.Count > 0)
             {
-
                 int idZaBrisanje = Convert.ToInt32(dgvRezervacijeZap.SelectedRows[0].Cells["Id"].Value);
-
                 var rezultat = MessageBox.Show($"Jeste li sigurni da želite obrisati stavku ID: {idZaBrisanje}?",
                                                "Potvrda", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
                 if (rezultat == DialogResult.Yes)
                 {
-
                     TerminRepository.DeleteTermin(idZaBrisanje);
-
-
-                    if (trenutniPrikaz == "Servisi")
-                    {
-                        dgvRezervacijeZap.DataSource = ServisiRepository.GetServisi();
-                    }
-                    else if(trenutniPrikaz == "Rezervacije")
-                    {
-                        dgvRezervacijeZap.DataSource = RezervacijaRepository.GetRezervacije();
-                    }
-
+                    OsvjeziPrikaz();
                     MessageBox.Show("Uspješno obrisano!");
                 }
             }
@@ -135,25 +144,15 @@ namespace CarCar
         private void btnDodajZap_Click(object sender, EventArgs e)
         {
             FrmUnosTermina forma = new FrmUnosTermina();
-
             if (forma.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show("Termin uspješno spremljen!", "Uspjeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                if (trenutniPrikaz == "Servisi")
-                {
-                    dgvRezervacijeZap.DataSource = ServisiRepository.GetServisi();
-                }
-                else
-                {
-                    dgvRezervacijeZap.DataSource = RezervacijaRepository.GetRezervacije();
-                }
+                OsvjeziPrikaz();
             }
         }
 
         private void btnUrediZap_Click(object sender, EventArgs e)
         {
-
             if (dgvRezervacijeZap.SelectedRows.Count > 0)
             {
                 int idZaUredivanje = Convert.ToInt32(dgvRezervacijeZap.SelectedRows[0].Cells["Id"].Value);
@@ -164,15 +163,7 @@ namespace CarCar
                     if (forma.ShowDialog() == DialogResult.OK)
                     {
                         MessageBox.Show("Termin uspješno spremljen!", "Uspjeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        if (trenutniPrikaz == "Servisi")
-                        {
-                            dgvRezervacijeZap.DataSource = ServisiRepository.GetServisi();
-                        }
-                        else
-                        {
-                            dgvRezervacijeZap.DataSource = RezervacijaRepository.GetRezervacije();
-                        }
+                        OsvjeziPrikaz();
                     }
                 }
             }
@@ -183,82 +174,33 @@ namespace CarCar
             string tekst = txtPretragaZap.Text;
             if (string.IsNullOrWhiteSpace(tekst))
             {
-                if (trenutniPrikaz == "Servisi")
-                {
-                    dgvRezervacijeZap.DataSource = ServisiRepository.GetServisi();
-                }
-                else
-                {
-                    dgvRezervacijeZap.DataSource = RezervacijaRepository.GetRezervacije();
-                }
-            }
-            else
-            {
-                if (trenutniPrikaz == "Servisi")
-                {
-                    dgvRezervacijeZap.DataSource = TerminRepository.PretraziServise(tekst);
-                }
-                else
-                {
-                    dgvRezervacijeZap.DataSource = TerminRepository.PretraziTermine(tekst);
-                }
-                FormatirajTablicu();
-            }
-        }
-        private void FormatirajTablicu()
-        {
-
-
-            if (dgvRezervacijeZap.DataSource == null) return;
-
-
-            if (dgvRezervacijeZap.Columns.Contains("Id")) dgvRezervacijeZap.Columns["Id"].HeaderText = "Id";
-
-            if (dgvRezervacijeZap.Columns.Contains("VrijemeOd")) dgvRezervacijeZap.Columns["VrijemeOd"].HeaderText = "Od";
-            if (dgvRezervacijeZap.Columns.Contains("VrijemeDo")) dgvRezervacijeZap.Columns["VrijemeDo"].HeaderText = "Do";
-            if (dgvRezervacijeZap.Columns.Contains("Od")) dgvRezervacijeZap.Columns["Od"].HeaderText = "Od";
-            if (dgvRezervacijeZap.Columns.Contains("Do")) dgvRezervacijeZap.Columns["Do"].HeaderText = "Do";
-
-            if (dgvRezervacijeZap.Columns.Contains("Status")) dgvRezervacijeZap.Columns["Status"].HeaderText = "Status";
-            if (dgvRezervacijeZap.Columns.Contains("Vozilo")) dgvRezervacijeZap.Columns["Vozilo"].HeaderText = "Vozilo";
-            if (dgvRezervacijeZap.Columns.Contains("Zaposlenik")) dgvRezervacijeZap.Columns["Zaposlenik"].HeaderText = "Zaposlenik";
-
-            if (dgvRezervacijeZap.Columns.Contains("OIB_Klijenta")) dgvRezervacijeZap.Columns["OIB_Klijenta"].HeaderText = "OIB Klijenta";
-            if (dgvRezervacijeZap.Columns.Contains("OIB_Klijenta")) dgvRezervacijeZap.Columns["OIB_Klijenta"].HeaderText = "OIB Klijenta";
-
-            string[] stupciZaSkrivanje = { "ZaposlenikID", "IdZaposlenika", "VoziloId", "IdVozila", "Klijent", "Tip", "OpisKvara" };
-            foreach (string stupac in stupciZaSkrivanje)
-            {
-                if (dgvRezervacijeZap.Columns.Contains(stupac))
-                {
-                    dgvRezervacijeZap.Columns[stupac].Visible = false;
-                }
+                OsvjeziPrikaz();
+                return;
             }
 
             if (trenutniPrikaz == "Servisi")
             {
-                if (dgvRezervacijeZap.Columns.Contains("CijenaNajma")) dgvRezervacijeZap.Columns["CijenaNajma"].Visible = false;
-
-                if (dgvRezervacijeZap.Columns.Contains("TrosakServisa"))
-                {
-                    dgvRezervacijeZap.Columns["TrosakServisa"].Visible = true;
-                    dgvRezervacijeZap.Columns["TrosakServisa"].HeaderText = "Trošak Servisa";
-                }
+                List<Termin> filtrirano = ServisiRepository.GetServisi().Where(r => Odgovara(r, tekst)).ToList();
+                PrikaziServise(filtrirano);
             }
             else
             {
-                if (dgvRezervacijeZap.Columns.Contains("TrosakServisa")) dgvRezervacijeZap.Columns["TrosakServisa"].Visible = false;
-
-                if (dgvRezervacijeZap.Columns.Contains("CijenaNajma"))
-                {
-                    dgvRezervacijeZap.Columns["CijenaNajma"].Visible = true;
-                    dgvRezervacijeZap.Columns["CijenaNajma"].HeaderText = "Cijena Najma";
-                }
+                List<Termin> filtrirano = RezervacijaRepository.GetRezervacije().Where(r => Odgovara(r, tekst)).ToList();
+                PrikaziRezervacije(filtrirano);
             }
+        }
 
-            dgvRezervacijeZap.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        private bool Odgovara(Termin r, string tekst)
+        {
+            tekst = tekst.ToLower();
+            string vozilo = r.Vozilo != null ? r.Vozilo.Registracija : "";
+            string zaposlenik = r.Zaposlenik != null ? r.Zaposlenik.Ime + " " + r.Zaposlenik.Prezime : "";
+            string oib = r.OIBKlijenta != null ? r.OIBKlijenta : "";
+            string status = r.Status != null ? r.Status : "";
+            return vozilo.ToLower().Contains(tekst)
+                || zaposlenik.ToLower().Contains(tekst)
+                || oib.ToLower().Contains(tekst)
+                || status.ToLower().Contains(tekst);
         }
     }
 }
-    
-
