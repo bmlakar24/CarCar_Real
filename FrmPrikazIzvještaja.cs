@@ -58,7 +58,7 @@ namespace CarCar
 
                 dgvIzvjestaj.Columns["UkupanNajam"].DefaultCellStyle.Format = "C2";
                 dgvIzvjestaj.Columns["UkupniTroskovi"].DefaultCellStyle.Format = "C2";
-                dgvIzvjestaj.Columns["Dobit"].DefaultCellStyle.Format = "C2";
+                dgvIzvjestaj.Columns["Dobit"].DefaultCellStyle.Format = "";
 
                 dgvIzvjestaj.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }

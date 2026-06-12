@@ -93,12 +93,12 @@ namespace CarCar
             t.Zaposlenik = (Zaposlenik)cmbZaposlenik.SelectedItem;
             if (odabraniTermin != null)
             {
-                TerminRepository.Update(t);
+                TerminRepository.UpdateTermin(t);
             }
 
             else
             {
-                TerminRepository.AddTermin(t);
+                TerminRepository.DodajTermin(t);
 
             }
 

@@ -10,7 +10,7 @@ namespace CarCar.Repositories
 {
     public class TerminRepository
     {
-        public static void AddTermin(Termin t)
+        public static void DodajTermin(Termin t)
         {
             string sql = $@"INSERT INTO Rezervacija (VrijemeOd, VrijemeDO, Status, OIB_Klijenta, Zaposlenik, Vozilo, TipNajma) 
                             VALUES ('{t.VrijemeOd:yyyy-MM-dd HH:mm:ss}', 
@@ -26,7 +26,7 @@ namespace CarCar.Repositories
             DB.CloseConnection();
         }
 
-        public static void DeleteTermin(int id)
+        public static void ObrisiTermin(int id)
         {
             string sql = $"DELETE FROM Rezervacija WHERE IdRez = {id}";
 
@@ -35,7 +35,7 @@ namespace CarCar.Repositories
             DB.CloseConnection();
         }
 
-        public static void Update(Termin t)
+        public static void UpdateTermin(Termin t)
         {
             string sql = $@"UPDATE Rezervacija 
                     SET VrijemeOd = '{t.VrijemeOd:yyyy-MM-dd HH:mm:ss}', 

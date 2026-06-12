@@ -139,7 +139,7 @@ namespace CarCar
                                                "Potvrda", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (rezultat == DialogResult.Yes)
                 {
-                    TerminRepository.DeleteTermin(idZaBrisanje);
+                    TerminRepository.ObrisiTermin(idZaBrisanje);
                     OsvjeziPrikaz();
                     MessageBox.Show("Uspješno obrisano!");
                 }
