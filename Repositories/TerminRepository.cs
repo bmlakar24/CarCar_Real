@@ -50,5 +50,21 @@ namespace CarCar.Repositories
             DB.ExecuteCommand(sql);
             DB.CloseConnection();
         }
+
+        public static bool PostojiPreklapanje(int idVozila, DateTime od, DateTime doKraj, int idTermina)
+        {
+            string sql = $@"SELECT IdRez FROM Rezervacija
+                            WHERE Vozilo = {idVozila}
+                              AND IdRez <> {idTermina}
+                              AND VrijemeOd < '{doKraj:yyyy-MM-dd HH:mm:ss}'
+                              AND '{od:yyyy-MM-dd HH:mm:ss}' < VrijemeDO";
+
+            DB.OpenConnection();
+            var reader = DB.GetDataReader(sql);
+            bool postoji = reader.HasRows;
+            reader.Close();
+            DB.CloseConnection();
+            return postoji;
+        }
     }
 }

@@ -91,6 +91,13 @@ namespace CarCar
             t.Vozilo = (Vozilo)cmbVozilo.SelectedItem;
             t.Klijent = (Klijent)cmbKlijent.SelectedItem;
             t.Zaposlenik = (Zaposlenik)cmbZaposlenik.SelectedItem;
+
+            int trenutniId = odabraniTermin != null ? odabraniTermin.Id : 0;
+            if (TerminRepository.PostojiPreklapanje(t.Vozilo.Id, t.VrijemeOd, t.VrijemeDo, trenutniId))
+            {
+                MessageBox.Show("Za odabrano vozilo već postoji rezervacija ili servis u tom periodu.", "Preklapanje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (odabraniTermin != null)
             {
                 TerminRepository.UpdateTermin(t);
